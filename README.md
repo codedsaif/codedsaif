@@ -1,12 +1,13 @@
 <h1 align="center">Hi 👋, I'm Saif Ali</h1>
-<h3 align="center">A passionate full stack web developer from India</h3>
+<h3 align="center">A Passionate Full Stack Web Developer</h3>
+<h4 aligh="center">Uttar Pradesh, India</h4>
 <img align="right" alt="Coding" width="400" src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif" />
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=s-a-i-f-a-l-i&label=Profile%20views&color=0e75b6&style=flat" alt="s-a-i-f-a-l-i" /> </p>
 
 <p align="left"> <a href="https://twitter.com/s_a_i_f___a_l_i" target="blank"><img src="https://img.shields.io/twitter/follow/s_a_i_f___a_l_i?logo=twitter&style=for-the-badge" alt="s_a_i_f___a_l_i" /></a> </p>
 
-- 👨‍💻 All of my projects are available at [https://s-a-i-f-a-l-i.netlify.app/](https://s-a-i-f-a-l-i.netlify.app/)
+- 👨‍💻 All of my projects are available at [https://s-a-i-f-a-l-i.github.io](https://s-a-i-f-a-l-i.github.io)
 
 - 💬 Ask me about **MERN**
 
