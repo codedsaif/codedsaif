@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Navbar, Profile, Footer } from "@/components";
+import { Navbar, Profile, Contact, Footer } from "@/components";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       </header>
       <main>
         <Profile />
+        {/* <Contact /> */}
       </main>
       <footer>
         <Footer />

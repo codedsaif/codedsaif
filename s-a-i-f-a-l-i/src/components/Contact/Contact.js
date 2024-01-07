@@ -1,9 +1,11 @@
+"use client";
 import {
   Container,
   Flex,
   Box,
   Heading,
   Text,
+  Link,
   IconButton,
   Button,
   VStack,
@@ -16,6 +18,7 @@ import {
   InputGroup,
   InputLeftElement,
   Textarea,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   MdPhone,
@@ -25,18 +28,52 @@ import {
   MdOutlineEmail,
 } from "react-icons/md";
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
+import { useRef } from "react";
 
-export default function contact() {
+export default function Contact() {
+  const form = useRef();
+  const userRef = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        `${process.env.REACT_APP_CONTACT_SERVICE_KEY}`,
+        `${process.env.REACT_APP_CONTACT_TEMPLATE_KEY}`,
+        form.current,
+        `${process.env.REACT_APP_CONTACT_PUBLIC_KEY}`
+      )
+      .then(
+        (result) => {
+          alert(
+            `Thanks for Contacting me ${userRef.current.value}. I will reply you as soon as possible. ${result.text}`
+          );
+          form.current.reset();
+        },
+        (error) => {
+          // console.log(error.text);
+          alert(
+            `Hey ${userRef.current.value}, Something is Wrong. Please try Later or Try to call Directly or send Email Direct`
+          );
+        }
+      );
+  };
   return (
-    <Container bg="#9DC4FB" maxW="full" mt={0} centerContent overflow="hidden">
+    <Container
+      id="Contact"
+      maxW={"7xl"}
+      bg={useColorModeValue("#02054B", "#010225")}
+      mt={0}
+      overflow="hidden"
+      borderRadius="lg"
+      mt={{ sm: 4, md: 16, lg: 10 }}
+      mb={{ sm: 4, md: 16, lg: 10 }}
+      pt={{ sm: 5, md: 5, lg: 16 }}
+      pb={{ sm: 5, md: 5, lg: 16 }}
+    >
       <Flex>
-        <Box
-          bg="#02054B"
-          color="white"
-          borderRadius="lg"
-          m={{ sm: 4, md: 16, lg: 10 }}
-          p={{ sm: 5, md: 5, lg: 16 }}
-        >
+        <Box color="white">
           <Box p={4}>
             <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
               <WrapItem>
@@ -47,28 +84,32 @@ export default function contact() {
                   </Text>
                   <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
                     <VStack pl={0} spacing={3} alignItems="flex-start">
-                      <Button
-                        size="md"
-                        height="48px"
-                        width="200px"
-                        variant="ghost"
-                        color="#DCE2FF"
-                        _hover={{ border: "2px solid #1C6FEB" }}
-                        leftIcon={<MdPhone color="#1970F1" size="20px" />}
-                      >
-                        +91-988888888
-                      </Button>
-                      <Button
-                        size="md"
-                        height="48px"
-                        width="200px"
-                        variant="ghost"
-                        color="#DCE2FF"
-                        _hover={{ border: "2px solid #1C6FEB" }}
-                        leftIcon={<MdEmail color="#1970F1" size="20px" />}
-                      >
-                        hello@abc.com
-                      </Button>
+                      <Link href="tel:+916397727906">
+                        <Button
+                          size="md"
+                          height="48px"
+                          width="200px"
+                          variant="ghost"
+                          color="#DCE2FF"
+                          _hover={{ border: "2px solid #1C6FEB" }}
+                          leftIcon={<MdPhone color="#1970F1" size="20px" />}
+                        >
+                          +91-6397727906
+                        </Button>
+                      </Link>
+                      <Link href="mailto:saifali27906@gmail.com">
+                        <Button
+                          size="md"
+                          height="48px"
+                          width="200px"
+                          variant="ghost"
+                          color="#DCE2FF"
+                          _hover={{ border: "2px solid #1C6FEB" }}
+                          leftIcon={<MdEmail color="#1970F1" size="20px" />}
+                        >
+                          saifali27906@gmail.com
+                        </Button>
+                      </Link>
                       <Button
                         size="md"
                         height="48px"
@@ -78,7 +119,7 @@ export default function contact() {
                         _hover={{ border: "2px solid #1C6FEB" }}
                         leftIcon={<MdLocationOn color="#1970F1" size="20px" />}
                       >
-                        Karnavati, India
+                        Uttar Pradesh, India
                       </Button>
                     </VStack>
                   </Box>

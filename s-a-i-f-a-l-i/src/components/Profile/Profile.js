@@ -23,8 +23,8 @@ export default function Profile() {
       <Stack
         align={"center"}
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 20, md: 28 }}
-        direction={{ base: "column", md: "row" }}
+        py={{ base: 28, md: 36 }}
+        direction={{ base: "column-reverse", md: "row" }}
       >
         <Stack flex={1} spacing={{ base: 5, md: 10 }}>
           <Heading
@@ -56,9 +56,9 @@ export default function Profile() {
           <Text color={"gray.500"}>
             A seasoned Full Stack Developer with hands-on experience and a
             strong technical foundation in Data Structures, Algorithms, HTML,
-            CSS, JavaScript, Php, WordPress, React, Next.js, Node.js, Express.js,
-            MongoDB, and more. Dedicated to continuous learning and staying
-            abreast of industry advancements.
+            CSS, JavaScript, Php, WordPress, React, Next.js, Node.js,
+            Express.js, MongoDB, and more. Dedicated to continuous learning and
+            staying abreast of industry advancements.
           </Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}

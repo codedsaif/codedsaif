@@ -25,7 +25,7 @@ import { IoMenu, IoCloseSharp } from "react-icons/io5";
 import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
-const Links = ["Profile", "About", "Skills", "Projects", "Contact", "Resume"];
+const Links = ["Profile", "About", "Skills", "Projects", "Contact"];
 
 const NavLink = ({ children }) => (
   <Link
@@ -50,7 +50,12 @@ export default function Navbar() {
     <>
       <Box
         id="Navbar"
+        position="fixed"
         maxW={"7xl"}
+        top={0}
+        left={0}
+        right={0}
+        zIndex={1000}
         bg={useColorModeValue("gray.100", "gray.900")}
         px={4}
         mt={4}
