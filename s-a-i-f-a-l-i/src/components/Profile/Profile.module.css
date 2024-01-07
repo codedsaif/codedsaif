@@ -1,0 +1,25 @@
+.designation {
+    -webkit-text-fill-color: hsla(0, 0%, 100%, 0);
+    -webkit-animation: animate 10s linear infinite;
+    animation: animate 8s linear infinite;
+    background: linear-gradient(90deg, #000, #fff, #000);
+    -webkit-background-clip: text;
+    background-repeat: no-repeat;
+    background-size: 80%;
+    font-family: sans-serif;
+    /* font-size: 2em; */
+    /* letter-spacing: 4px; */
+    overflow: hidden;
+    position: relative;
+}
+
+
+@keyframes animate {
+    0% {
+        background-position: -460%;
+    }
+
+    100% {
+        background-position: 460%;
+    }
+}

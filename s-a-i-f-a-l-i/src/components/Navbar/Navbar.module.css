@@ -1,0 +1,54 @@
+.logo {
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1.2;
+    text-shadow: 0 0 5px #3e6bde, 0 0 15px #f9f9f9, 0 0 20px #3e6bde, 0 0 40px #f9f9f9, 0 0 60px #4dc6cd, 0 0 10px #f9f9f9, 0 0 98px #3e6bde;
+    color: #3e6bde;
+    text-align: center;
+    animation: blink 10s infinite;
+    -webkit-animation: blink 10s infinite;
+}
+
+@-webkit-keyframes blink {
+
+    20%,
+    24%,
+    55% {
+        color: rgb(49, 200, 234);
+        text-shadow: none;
+    }
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        text-shadow: 0 0 5px #3b64c4, 0 0 15px #3b64c4, 0 0 20px #4a53cf, 0 0 40px #4a53cf, 0 0 60px #3b64c4, 0 0 10px #4a53cf, 0 0 98px #3b64c4;
+        color: #3b64c4;
+    }
+}
+
+@keyframes blink {
+
+    20%,
+    24%,
+    55% {
+        color: #111;
+        text-shadow: none;
+    }
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+        color: #ffffff;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+}
