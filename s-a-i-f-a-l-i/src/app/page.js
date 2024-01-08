@@ -9,7 +9,7 @@ export default function Home() {
       </header>
       <main>
         <Profile />
-        {/* <Contact /> */}
+        <Contact />
       </main>
       <footer>
         <Footer />

@@ -66,7 +66,12 @@ export default function Footer() {
         align={{ base: "center", md: "center" }}
       >
         <Text>© {currentYear} developersdrills. All rights reserved</Text>
-        <Stack direction={"row"} spacing={6}>
+        <Stack
+          direction={"row"}
+          flexWrap={"wrap"}
+          justifyContent={"center"}
+          spacing={6}
+        >
           <SocialButton
             label={"developersdrills-Website"}
             href={"https://www.linkedin.com/company/developerdrills/"}

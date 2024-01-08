@@ -75,7 +75,7 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Link href="#Navbar">
+            <Link href="#Profile">
               <Box className={styles.logo}>Saif Ali</Box>
             </Link>
             <HStack
