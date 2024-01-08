@@ -28,8 +28,9 @@ import {
   MdFacebook,
   MdOutlineEmail,
 } from "react-icons/md";
-import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
+import { BsGithub, BsPerson, BsLinkedin } from "react-icons/bs";
 import { useState, useRef } from "react";
+import { SiLeetcode } from "react-icons/si";
 import emailjs from "@emailjs/browser";
 
 export default function Contact() {
@@ -125,30 +126,36 @@ export default function Contact() {
             py={2}
             alignItems="flex-start"
           >
-            <IconButton
-              aria-label="facebook"
-              variant="ghost"
-              size="lg"
-              isRound={true}
-              _hover={{ bg: "#0D74FF" }}
-              icon={<MdFacebook size="28px" />}
-            />
-            <IconButton
-              aria-label="github"
-              variant="ghost"
-              size="lg"
-              isRound={true}
-              _hover={{ bg: "#0D74FF" }}
-              icon={<BsGithub size="28px" />}
-            />
-            <IconButton
-              aria-label="discord"
-              variant="ghost"
-              size="lg"
-              isRound={true}
-              _hover={{ bg: "#0D74FF" }}
-              icon={<BsDiscord size="28px" />}
-            />
+            <Link href="https://github.com/S-a-i-f-A-l-i">
+              <IconButton
+                aria-label="github"
+                variant="ghost"
+                size="lg"
+                isRound={true}
+                _hover={{ bg: "#0D74FF" }}
+                icon={<BsGithub size="28px" />}
+              />
+            </Link>
+            <Link href="https://leetcode.com/S-a-i-f-A-l-i/">
+              <IconButton
+                aria-label="Leetcode"
+                variant="ghost"
+                size="lg"
+                isRound={true}
+                _hover={{ bg: "#0D74FF" }}
+                icon={<SiLeetcode size="28px" />}
+              />
+            </Link>
+            <Link href="https://www.linkedin.com/in/saif-a-l-i-48a374231/">
+              <IconButton
+                aria-label="Linkedin"
+                variant="ghost"
+                size="lg"
+                isRound={true}
+                _hover={{ bg: "#0D74FF" }}
+                icon={<BsLinkedin size="28px" />}
+              />
+            </Link>
           </HStack>
         </Box>
 
@@ -209,10 +216,9 @@ export default function Contact() {
               <FormControl id="name">
                 <FormLabel>Your Name</FormLabel>
                 <InputGroup borderColor="#E0E1E7">
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<BsPerson color="gray.800" />}
-                  />
+                  <InputLeftElement pointerEvents="none">
+                    <BsPerson color="gray.800" />
+                  </InputLeftElement>
                   <Input
                     name="name"
                     type="text"
@@ -225,10 +231,9 @@ export default function Contact() {
               <FormControl id="email">
                 <FormLabel>Email</FormLabel>
                 <InputGroup borderColor="#E0E1E7">
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<MdOutlineEmail color="gray.800" />}
-                  />
+                  <InputLeftElement pointerEvents="none">
+                    <MdOutlineEmail color="gray.800" />
+                  </InputLeftElement>
                   <Input
                     name="email"
                     type="text"
