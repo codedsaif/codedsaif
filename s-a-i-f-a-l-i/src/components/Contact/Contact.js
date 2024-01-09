@@ -115,7 +115,17 @@ export default function Contact() {
         flexWrap={"wrap"}
       >
         <Box>
-          <Heading>Contact</Heading>
+          <Heading
+            fontWeight={600}
+            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+            lineHeight={"110%"}
+            color="#DCE2FF"
+          >
+            Get in{" "}
+            <Text as={"span"} color={"orange.400"}>
+              Touch
+            </Text>
+          </Heading>
           <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
             Fill up the form below to contact
           </Text>

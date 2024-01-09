@@ -9,24 +9,25 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Skill from "../Skill/Skill.js";
-import html from "@/assets/html.png";
-import css from "@/assets/css.png";
-import bootstrap from "@/assets/bootstrap.png";
-import javascript from "@/assets/javascript.png";
-import php from "@/assets/php.png";
-import java from "@/assets/java.png";
-import react from "@/assets/react.png";
-import redux from "@/assets/redux.jpg";
-import next from "@/assets/next.png";
-import node from "@/assets/node.png";
-import express from "@/assets/express.png";
-import mongodb from "@/assets/mongodb.png";
-import github from "@/assets/github.png";
-import postman from "@/assets/postman.webp";
-import wordpress from "@/assets/wordpress.png";
-import algorithms from "@/assets/algorithms.png";
-import dataStructures from "@/assets/dataStructures.png";
-// import  from "@/assets/";
+import html from "@/assets/tech-skills/html.png";
+import css from "@/assets/tech-skills/css.png";
+import bootstrap from "@/assets/tech-skills/bootstrap.png";
+import tailwindCSS from "@/assets/tech-skills/tailwind.png";
+import javascript from "@/assets/tech-skills/javascript.png";
+import php from "@/assets/tech-skills/php.png";
+import java from "@/assets/tech-skills/java.png";
+import react from "@/assets/tech-skills/react.png";
+import redux from "@/assets/tech-skills/redux.jpg";
+import next from "@/assets/tech-skills/next.png";
+import node from "@/assets/tech-skills/node.png";
+import express from "@/assets/tech-skills/express.png";
+import mongodb from "@/assets/tech-skills/mongodb.png";
+import github from "@/assets/tech-skills/github.png";
+import postman from "@/assets/tech-skills/postman.webp";
+import wordpress from "@/assets/tech-skills/wordpress.png";
+import algorithms from "@/assets/tech-skills/algorithms.png";
+import dataStructures from "@/assets/tech-skills/dataStructures.png";
+// import  from "@/assets/tech-skills/";
 
 export default function Skills() {
   const techSkills = [
@@ -68,6 +69,21 @@ export default function Skills() {
           </Text>
           <Text fontSize="sm" align={"center"}>
             Front-end framework for building responsive websites.
+          </Text>
+        </Stack>
+      ),
+    },
+    {
+      name: "Tailwind CSS",
+      image: tailwindCSS,
+      toolTipText: (
+        <Stack spacing={1}>
+          <Text as="b" align={"center"}>
+            Tailwind CSS
+          </Text>
+          <Text fontSize="sm" align={"center"}>
+            Utilizing a utility-first approach for efficient and consistent
+            styling in web development.
           </Text>
         </Stack>
       ),

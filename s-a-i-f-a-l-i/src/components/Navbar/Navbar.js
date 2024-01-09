@@ -33,20 +33,6 @@ const Links = [
   "Projects",
   "Contact",
 ];
-// const Links = [
-//   "Profile",
-//   "About",
-//   {
-//     label: "Skills",
-//     sublinks: [
-//       "Tech Skills",
-//       "Soft Skills",
-
-//     ],
-//   },
-//   "Projects",
-//   "Contact",
-// ];
 
 const NavLink = ({ children }) => (
   <Link
@@ -107,20 +93,6 @@ export default function Navbar() {
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
-              {/* {Links.map((link, index) => (
-                <NavLink key={index}>
-                  {typeof link === "string" ? (
-                    link
-                  ) : (
-                    <>
-                      {link.label}
-                      {link.sublinks.map((sublink, subIndex) => (
-                        <NavLink key={subIndex}>{sublink}</NavLink>
-                      ))}
-                    </>
-                  )}
-                </NavLink>
-              ))} */}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>

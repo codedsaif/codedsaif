@@ -44,7 +44,7 @@ const Feature = ({ title, text, icon }) => {
   );
 };
 
-export default function SimpleThreeColumns() {
+export default function SoftSkills() {
   return (
     <Container
       id="Soft Skills"

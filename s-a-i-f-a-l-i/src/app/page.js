@@ -5,6 +5,7 @@ import {
   About,
   Skills,
   SoftSkills,
+  Projects,
   Contact,
   Footer,
 } from "@/components";
@@ -20,6 +21,7 @@ export default function Home() {
         <About />
         <Skills />
         <SoftSkills />
+        <Projects />
         <Contact />
       </main>
       <footer>

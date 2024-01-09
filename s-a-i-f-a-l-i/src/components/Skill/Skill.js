@@ -1,6 +1,4 @@
 import { Avatar, Box, Flex, keyframes, Tooltip } from "@chakra-ui/react";
-import html from "@/assets/html.png";
-import css from "@/assets/css.png";
 
 export default function Skill({
   tipText = "Skill",
