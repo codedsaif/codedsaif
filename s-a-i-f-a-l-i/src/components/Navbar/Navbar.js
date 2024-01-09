@@ -25,7 +25,28 @@ import { IoMenu, IoCloseSharp } from "react-icons/io5";
 import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
-const Links = ["Profile", "About", "Skills", "Projects", "Contact"];
+const Links = [
+  "Profile",
+  "About",
+  "Tech Skills",
+  "Soft Skills",
+  "Projects",
+  "Contact",
+];
+// const Links = [
+//   "Profile",
+//   "About",
+//   {
+//     label: "Skills",
+//     sublinks: [
+//       "Tech Skills",
+//       "Soft Skills",
+
+//     ],
+//   },
+//   "Projects",
+//   "Contact",
+// ];
 
 const NavLink = ({ children }) => (
   <Link
@@ -58,7 +79,7 @@ export default function Navbar() {
         zIndex={1000}
         bg={useColorModeValue("gray.100", "gray.900")}
         px={4}
-        mt={4}
+        mt={2}
         mx="auto"
         borderRadius={10}
         boxShadow={useColorModeValue(
@@ -86,6 +107,20 @@ export default function Navbar() {
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
+              {/* {Links.map((link, index) => (
+                <NavLink key={index}>
+                  {typeof link === "string" ? (
+                    link
+                  ) : (
+                    <>
+                      {link.label}
+                      {link.sublinks.map((sublink, subIndex) => (
+                        <NavLink key={subIndex}>{sublink}</NavLink>
+                      ))}
+                    </>
+                  )}
+                </NavLink>
+              ))} */}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
@@ -131,26 +166,6 @@ export default function Navbar() {
                 </MenuList>
               </Menu>
             </Stack>
-            {/* <Menu>
-              <MenuButton
-                as={Button}
-                rounded={"full"}
-                variant={"link"}
-                cursor={"pointer"}
-                minW={0}
-              >
-                <Avatar
-                  size={"sm"}
-                  src={"https://avatars.githubusercontent.com/u/108917329?v=4"}
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Link 1</MenuItem>
-                <MenuItem>Link 2</MenuItem>
-                <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
-              </MenuList>
-            </Menu> */}
           </Flex>
         </Flex>
 

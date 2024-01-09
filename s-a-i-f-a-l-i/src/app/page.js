@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { Navbar, Profile, About, Skills, Contact, Footer } from "@/components";
+import {
+  Navbar,
+  Profile,
+  About,
+  Skills,
+  SoftSkills,
+  Contact,
+  Footer,
+} from "@/components";
 
 export default function Home() {
   return (
@@ -11,6 +19,7 @@ export default function Home() {
         <Profile />
         <About />
         <Skills />
+        <SoftSkills />
         <Contact />
       </main>
       <footer>

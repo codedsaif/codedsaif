@@ -271,7 +271,7 @@ export default function Skills() {
   ];
   return (
     <Container
-      id="Skills"
+      id="Tech Skills"
       display="flex"
       flexDirection={"column"}
       gap={"40px"}
