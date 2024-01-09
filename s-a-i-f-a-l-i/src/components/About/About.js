@@ -37,10 +37,10 @@ export default function About() {
           </Text>
         </Heading>
         <Text color={"gray.500"} maxW={"3xl"}>
-          Welcome to my digital space! I'm Saif Ali, a passionate and
+          Welcome to my digital space! I&apos;m Saif Ali, a passionate and
           results-driven Full Stack Developer. With six months of immersive
-          experience in web development, I'm on a mission to bring creativity
-          and functionality to the digital realm.
+          experience in web development, I&apos;m on a mission to bring
+          creativity and functionality to the digital realm.
         </Text>
         <Text color={"gray.500"} maxW={"3xl"} textAlign={"left"}>
           My journey in the world of coding has equipped me with a diverse skill
@@ -66,7 +66,8 @@ export default function About() {
           Education-wise, I hold a Full Stack Web Development certification from
           Masai School and a B.Com degree from Krishna Mahavidyalaya
           (M.J.P.R.U.). Complementing these credentials is the successful
-          completion of an IT - O'Level course from S.A. Institute (N.I.E.I.T.).
+          completion of an IT - O&apos;Level course from S.A. Institute
+          (N.I.E.I.T.).
         </Text>
       </Stack>
     </Container>
