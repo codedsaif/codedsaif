@@ -102,8 +102,7 @@ export default function Contact() {
       bg={useColorModeValue("#02054B", "#010225")}
       overflow="hidden"
       borderRadius="lg"
-      pt={{ base: 4, sm: 8, md: 8, lg: 16 }}
-      pb={{ base: 4, sm: 8, md: 8, lg: 16 }}
+      py={{ base: 20, md: 28 }}
       color="white"
     >
       <Box
