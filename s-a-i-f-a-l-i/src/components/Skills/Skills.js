@@ -278,9 +278,6 @@ export default function Skills() {
       alignItems="center"
       justifyContent="space-evenly"
       maxW={"7xl"}
-      // bg={useColorModeValue("#1e293b", "#23283e")}
-      // bg={useColorModeValue("#779ac3", "#23283e")}
-      // bg={useColorModeValue("#a1c9ed", "#23283e")}
       overflow="hidden"
       borderRadius="lg"
       py={{ base: 20, md: 28 }}
