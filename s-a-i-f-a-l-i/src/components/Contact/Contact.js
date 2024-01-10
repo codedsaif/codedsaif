@@ -232,6 +232,7 @@ export default function Contact() {
                     name="name"
                     type="text"
                     size="md"
+                    placeholder={"Saif Ali"}
                     value={formDetails.name}
                     onChange={handleChange}
                   />
@@ -245,10 +246,12 @@ export default function Contact() {
                   </InputLeftElement>
                   <Input
                     name="email"
-                    type="text"
+                    type="email"
                     size="md"
+                    placeholder={"saifali27906@gmail.com"}
                     value={formDetails.email}
                     onChange={handleChange}
+                    required={true}
                   />
                 </InputGroup>
               </FormControl>

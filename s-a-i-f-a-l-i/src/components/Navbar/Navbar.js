@@ -26,7 +26,6 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
 const Links = [
-  "Profile",
   "About",
   "Tech Skills",
   "Soft Skills",
@@ -83,7 +82,12 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Link href="#Profile">
+            <Link
+              href="#Profile"
+              _hover={{
+                textDecoration: "none",
+              }}
+            >
               <Box className={styles.logo}>Saif Ali</Box>
             </Link>
             <HStack

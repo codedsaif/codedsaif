@@ -16,6 +16,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import styles from "./Profile.module.css";
+import Saif_Ali_Professional_Picture from "@/assets/Saif_Ali_Professional_Picture.png";
 
 export default function Profile() {
   return (
@@ -26,7 +27,7 @@ export default function Profile() {
         py={{ base: 28, md: 36 }}
         direction={{ base: "column-reverse", md: "row" }}
       >
-        <Stack flex={1} spacing={{ base: 5, md: 10 }}>
+        <Stack flex={5} spacing={{ base: 5, md: 10 }}>
           <Heading
             lineHeight={1.1}
             fontWeight={600}
@@ -88,7 +89,7 @@ export default function Profile() {
           </Stack>
         </Stack>
         <Flex
-          flex={1}
+          flex={3}
           justify={"center"}
           align={"center"}
           position={"relative"}
@@ -104,22 +105,22 @@ export default function Profile() {
             color={useColorModeValue("red.50", "red.400")}
           />
           <Box
-            // w={"100%"}
             position={"relative"}
-            // height={"300px"}
             rounded={"2xl"}
             boxShadow={"2xl"}
-            // width={"full"}
+            width={"full"}
             overflow={"hidden"}
+            maxW={"460px"}
           >
             <Image
               alt={"Hero Image"}
-              fit={"cover"}
+              // fit={"cover"}
               align={"center"}
-              w={"100%"}
-              h={"100%"}
+              w={{ base: "100%" }}
+              // h={"80%"}
               src={
-                "https://avatars.githubusercontent.com/u/108917329?s=400&u=4217e7472abcb19bb072bbbc5e78152265981989&v=4"
+                Saif_Ali_Professional_Picture?.src
+                // "https://avatars.githubusercontent.com/u/108917329?s=400&u=4217e7472abcb19bb072bbbc5e78152265981989&v=4"
               }
             />
           </Box>
