@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import Slider from "../Slider/ProjectImageSlider";
 import { FaHashtag } from "react-icons/fa";
+import ProjectsButtons from "../ProjectsButtons/ProjectsButtons";
 
 export default function Project({
   stack = "",
@@ -26,7 +27,7 @@ export default function Project({
   gitHubLink = "",
 }) {
   return (
-    <Flex py={6} alignItems={"center"} justifyContent={"center"}>
+    <Flex py={6} justifyContent={"center"}>
       <Box
         maxW={"445px"}
         w={"full"}
@@ -81,7 +82,7 @@ export default function Project({
                   verticleAlign={"middle"}
                 >
                   <TagLeftIcon>
-                    <FaHashtag />
+                    <FaHashtag size="md" />
                   </TagLeftIcon>
                   <TagLabel>{tag}</TagLabel>
                 </Tag>
@@ -89,8 +90,8 @@ export default function Project({
             </Box>
           </Stack>
         </Stack>
-        <Stack mt={6} direction={"row"} spacing={4} align={"center"}>
-          <Avatar
+        <Stack mt={6} direction={"col"} align={"center"}>
+          {/* <Avatar
             src={
               "https://web.archive.org/web/20230521174951/https://avatars0.githubusercontent.com/u/1164541?v=4"
             }
@@ -99,7 +100,8 @@ export default function Project({
           <Stack direction={"column"} spacing={0} fontSize={"sm"}>
             <Text fontWeight={600}>Achim Rolle</Text>
             <Text color={"gray.500"}>Feb 08, 2021 · 6min read</Text>
-          </Stack>
+          </Stack> */}
+          <ProjectsButtons liveLink={liveLink} gitHubLink={gitHubLink} />
         </Stack>
       </Box>
     </Flex>

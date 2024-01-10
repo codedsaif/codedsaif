@@ -14,11 +14,9 @@ import Slider from "react-slick";
 import jobify1 from "@/assets/projects/jobify1.jpg";
 
 const settings = {
-  dots: true,
-  arrows: false,
-  fade: true,
+  // dots: true,
   infinite: true,
-  autoplay: false,
+  speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
 };
@@ -27,25 +25,7 @@ export default function ProjectImageSlider({ sliderData }) {
   const [slider, setSlider] = useState(null);
 
   const top = useBreakpointValue({ base: "90%", md: "50%" });
-  const side = useBreakpointValue({ base: "30%", md: "40px" });
-
-  const cards = [
-    {
-      title: "Design Projects 1",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image: jobify1?.src,
-    },
-    {
-      title: "Design Projects 2",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image: jobify1?.src,
-    },
-    {
-      title: "Design Projects 3",
-      text: "The project board is an exclusive resource for contract work. It's perfect for freelancers, agencies, and moonlighters.",
-      image: jobify1?.src,
-    },
-  ];
+  const side = useBreakpointValue({ base: "10%", md: "18px" });
 
   return (
     <Box
@@ -54,7 +34,7 @@ export default function ProjectImageSlider({ sliderData }) {
       width={"full"}
       overflow={"hidden"}
     >
-      {/* <link
+      <link
         rel="stylesheet"
         type="text/css"
         charSet="UTF-8"
@@ -65,7 +45,7 @@ export default function ProjectImageSlider({ sliderData }) {
         type="text/css"
         charSet="UTF-8"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-      /> */}
+      />
       <IconButton
         aria-label="left-arrow"
         variant="ghost"
@@ -75,8 +55,9 @@ export default function ProjectImageSlider({ sliderData }) {
         transform={"translate(0%, -50%)"}
         zIndex={2}
         onClick={() => slider?.slickPrev()}
+        backgroundColor={"rgba(2, 5, 75, 0.4)"}
       >
-        <BiLeftArrowAlt size="40px" />
+        <BiLeftArrowAlt size="24px" />
       </IconButton>
       <IconButton
         aria-label="right-arrow"
@@ -87,8 +68,9 @@ export default function ProjectImageSlider({ sliderData }) {
         transform={"translate(0%, -50%)"}
         zIndex={2}
         onClick={() => slider?.slickNext()}
+        backgroundColor={"rgba(2, 5, 75, 0.4)"}
       >
-        <BiRightArrowAlt size="40px" />
+        <BiRightArrowAlt size="24px" />
       </IconButton>
       <Slider {...settings} ref={(slider) => setSlider(slider)}>
         {sliderData.map((slide, index) => (
@@ -99,7 +81,7 @@ export default function ProjectImageSlider({ sliderData }) {
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
-            backgroundImage={`url(${slide.image}.src)`}
+            backgroundImage={`url(${slide.image?.src})`}
           >
             <Container size="container.lg" height="240px" position="relative">
               <Stack

@@ -307,9 +307,9 @@ export default function Projects() {
           lineHeight={"110%"}
           color={useColorModeValue("#000", "#DCE2FF")}
         >
-          Soft{" "}
+          Project{" "}
           <Text as={"span"} color={"orange.400"}>
-            Skills
+            Gallery
           </Text>
         </Heading>
       </Stack>
