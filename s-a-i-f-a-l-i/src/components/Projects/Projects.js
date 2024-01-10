@@ -294,7 +294,7 @@ export default function Projects() {
   ];
   return (
     <Container
-      id="Soft Skills"
+      id="Projects"
       maxW={"7xl"}
       borderRadius="lg"
       color={"gray.500"}

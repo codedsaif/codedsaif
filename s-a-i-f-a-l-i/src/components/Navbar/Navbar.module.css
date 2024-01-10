@@ -9,6 +9,10 @@
     -webkit-animation: blink 10s infinite;
 }
 
+.logo:hover {
+    text-decoration: none;
+}
+
 @-webkit-keyframes blink {
 
     20%,

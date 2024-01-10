@@ -20,7 +20,7 @@ export default function BasicStatistics() {
   const themeColor = useColorModeValue("2077", "2077");
   return (
     <Container
-      id="#Statistics"
+      id="Statistics"
       maxW={"7xl"}
       borderRadius="lg"
       bg={useColorModeValue("#02054B", "#010225")}
