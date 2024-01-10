@@ -50,16 +50,16 @@ export default function SoftSkills() {
       id="Soft Skills"
       maxW={"7xl"}
       borderRadius="lg"
-      bg={useColorModeValue("#02054B", "#010225")}
+      // bg={useColorModeValue("#02054B", "#010225")}
       color={"gray.500"}
-      py={{ base: 20, md: 28 }}
+      pb={{ base: 20, md: 28 }}
     >
       <Stack textAlign={"center"} align={"center"} pb={{ base: 10 }}>
         <Heading
           fontWeight={600}
           fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
           lineHeight={"110%"}
-          color="#DCE2FF"
+          color={useColorModeValue("#000", "#DCE2FF")}
         >
           Soft{" "}
           <Text as={"span"} color={"orange.400"}>

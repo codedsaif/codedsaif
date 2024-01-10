@@ -4,6 +4,7 @@ import {
   Profile,
   About,
   Skills,
+  GitHubActivity,
   SoftSkills,
   Projects,
   Contact,
@@ -21,6 +22,7 @@ export default function Home() {
         <About />
         <Skills />
         <SoftSkills />
+        <GitHubActivity />
         <Projects />
         <Contact />
       </main>

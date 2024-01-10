@@ -3,6 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Profile from "./Profile/Profile";
 import Skills from "./Skills/Skills";
+import GitHubActivity from "./GitHubActivity/GitHubActivity";
 import SoftSkills from "./SoftSkills/SoftSkills";
 import Projects from "./Projects/Projects";
 import Contact from "./Contact/Contact";
@@ -16,6 +17,7 @@ export {
   About,
   Skills,
   SoftSkills,
+  GitHubActivity,
   Projects,
   Contact,
 };

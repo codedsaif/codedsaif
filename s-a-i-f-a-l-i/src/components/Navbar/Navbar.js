@@ -30,6 +30,7 @@ const Links = [
   "About",
   "Tech Skills",
   "Soft Skills",
+  "Statistics",
   "Projects",
   "Contact",
 ];
