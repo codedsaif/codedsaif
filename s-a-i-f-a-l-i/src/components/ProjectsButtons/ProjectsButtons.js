@@ -1,6 +1,7 @@
 import { Link, Button, Flex, useColorModeValue } from "@chakra-ui/react";
 
 export default function ProjectsButtons({ liveLink = "", gitHubLink = "" }) {
+  const buttonBgColor = useColorModeValue("#02054B", "#010225");
   return (
     <Flex w={"100%"} justifyContent="space-between" alignItems="center">
       {liveLink && (
@@ -9,7 +10,7 @@ export default function ProjectsButtons({ liveLink = "", gitHubLink = "" }) {
             px={8}
             fontSize={"sm"}
             rounded={"full"}
-            bg={useColorModeValue("#02054B", "#010225")}
+            bg={buttonBgColor}
             color={"white"}
             boxShadow={
               "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
@@ -32,7 +33,7 @@ export default function ProjectsButtons({ liveLink = "", gitHubLink = "" }) {
             px={8}
             fontSize={"sm"}
             rounded={"full"}
-            bg={useColorModeValue("#02054B", "#010225")}
+            bg={buttonBgColor}
             color={"white"}
             boxShadow={
               "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
