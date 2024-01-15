@@ -54,7 +54,7 @@ export default function Project({
           </Box>
           <Stack>
             <Text
-              color={"green.500"}
+              color={useColorModeValue("#02054B", "#fff")}
               textTransform={"uppercase"}
               fontWeight={800}
               fontSize={"sm"}
@@ -63,7 +63,7 @@ export default function Project({
               {stack}
             </Text>
             <Heading
-              color={useColorModeValue("gray.700", "white")}
+              color={useColorModeValue("gray.700", "#fff")}
               fontSize={"2xl"}
               fontFamily={"body"}
             >
@@ -91,16 +91,6 @@ export default function Project({
           </Stack>
         </Stack>
         <Stack mt={6} direction={"col"} align={"center"}>
-          {/* <Avatar
-            src={
-              "https://web.archive.org/web/20230521174951/https://avatars0.githubusercontent.com/u/1164541?v=4"
-            }
-            alt={"Author"}
-          />
-          <Stack direction={"column"} spacing={0} fontSize={"sm"}>
-            <Text fontWeight={600}>Achim Rolle</Text>
-            <Text color={"gray.500"}>Feb 08, 2021 · 6min read</Text>
-          </Stack> */}
           <ProjectsButtons liveLink={liveLink} gitHubLink={gitHubLink} />
         </Stack>
       </Box>

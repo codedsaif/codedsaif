@@ -46,8 +46,8 @@ export default function BasicStatistics() {
             objectFit="cover"
             h={"100%"}
             w={"100%"}
-            src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=S-a-i-f-A-l-i&theme=2077"
-            alt="S-a-i-f-A-l-i's Activity Graph"
+            src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=isaifali&theme=2077"
+            alt="isaifali's Activity Graph"
           />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -56,8 +56,8 @@ export default function BasicStatistics() {
             h={"100%"}
             w={"100%"}
             borderRadius={"lg"}
-            src="https://github-readme-streak-stats.herokuapp.com/?user=S-a-i-f-A-l-i&"
-            alt="S-a-i-f-A-l-i's Activity Graph"
+            src="https://github-readme-streak-stats.herokuapp.com/?user=isaifali"
+            alt="isaifali's Activity Graph"
           />
         </GridItem>
         <GridItem colSpan={{ base: 2, md: 1 }}>
@@ -65,13 +65,13 @@ export default function BasicStatistics() {
             h={"100%"}
             w={"100%"}
             borderRadius={"lg"}
-            src={`https://github-readme-stats.vercel.app/api?username=S-a-i-f-A-l-i&show_icons=true&locale=en`}
-            alt="S-a-i-f-A-l-i's Github Stats"
+            src={`https://github-readme-stats.vercel.app/api?username=isaifali&show_icons=true&locale=en`}
+            alt="isaifali's Github Stats"
           />
         </GridItem>
         <GridItem colSpan={2}>
           <GitHubCalendar
-            username="S-a-i-f-A-l-i"
+            username="isaifali"
             blockSize={18}
             blockMargin={8}
             style={{

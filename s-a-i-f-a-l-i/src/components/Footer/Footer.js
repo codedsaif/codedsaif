@@ -74,7 +74,7 @@ export default function Footer() {
         >
           <SocialButton
             label={"developersdrills-Website"}
-            href={"https://www.linkedin.com/company/developerdrills/"}
+            href={"https://developersdrills.co"}
           >
             <TbWorldHeart />
           </SocialButton>

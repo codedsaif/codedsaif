@@ -69,7 +69,7 @@ const NavLink = ({ children }) => {
           rounded={"md"}
           _hover={{
             textDecoration: "none",
-            bg: useColorModeValue("gray.200", "gray.700"),
+            bg: "gray.400",
           }}
         >
           {key}
@@ -94,7 +94,7 @@ const NavLink = ({ children }) => {
       rounded={"md"}
       _hover={{
         textDecoration: "none",
-        bg: useColorModeValue("gray.200", "gray.700"),
+        bg: "gray.400",
       }}
       href={`#${children}`}
     >
@@ -194,6 +194,7 @@ export default function Navbar() {
                   {accounts.map((account, index) => {
                     return (
                       <Link
+                        key={account.label}
                         _hover={{
                           textDecoration: "none",
                         }}

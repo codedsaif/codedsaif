@@ -109,7 +109,7 @@ export default function Contact() {
         w={{ base: "100%", md: "auto" }}
         display={"flex"}
         flexDirection={{ base: "row", md: "column" }}
-        alignItems="center"
+        alignItems="start"
         justifyContent="space-between"
         textAlign="left"
         flexWrap={"wrap"}
@@ -141,7 +141,7 @@ export default function Contact() {
                 variant="ghost"
                 size="lg"
                 isRound={true}
-                _hover={{ bg: "#0D74FF" }}
+                _hover={{ bg: "#DCE2FF" }}
                 icon={<BsGithub size="28px" />}
               />
             </Link>
@@ -151,7 +151,7 @@ export default function Contact() {
                 variant="ghost"
                 size="lg"
                 isRound={true}
-                _hover={{ bg: "#0D74FF" }}
+                _hover={{ bg: "#DCE2FF" }}
                 icon={<SiLeetcode size="28px" />}
               />
             </Link>
@@ -161,7 +161,7 @@ export default function Contact() {
                 variant="ghost"
                 size="lg"
                 isRound={true}
-                _hover={{ bg: "#0D74FF" }}
+                _hover={{ bg: "#DCE2FF" }}
                 icon={<BsLinkedin size="28px" />}
               />
             </Link>
@@ -180,8 +180,8 @@ export default function Contact() {
                 // width="280px"
                 variant="ghost"
                 color="#DCE2FF"
-                _hover={{ border: "2px solid #1C6FEB" }}
-                leftIcon={<MdPhone color="#1970F1" size="20px" />}
+                _hover={{ border: "2px solid #DCE2FF" }}
+                leftIcon={<MdPhone color="#DCE2FF" size="20px" />}
               >
                 +91-6397727906
               </Button>
@@ -193,8 +193,8 @@ export default function Contact() {
                 // width="280px"
                 variant="ghost"
                 color="#DCE2FF"
-                _hover={{ border: "2px solid #1C6FEB" }}
-                leftIcon={<MdEmail color="#1970F1" size="20px" />}
+                _hover={{ border: "2px solid #DCE2FF" }}
+                leftIcon={<MdEmail color="#DCE2FF" size="20px" />}
               >
                 saifali27906@gmail.com
               </Button>
@@ -205,8 +205,8 @@ export default function Contact() {
               //   width="280px"
               variant="ghost"
               color="#DCE2FF"
-              _hover={{ border: "2px solid #1C6FEB" }}
-              leftIcon={<MdLocationOn color="#1970F1" size="20px" />}
+              _hover={{ border: "2px solid #DCE2FF" }}
+              leftIcon={<MdLocationOn color="#DCE2FF" size="20px" />}
             >
               Uttar Pradesh, India
             </Button>
@@ -272,7 +272,7 @@ export default function Contact() {
               <FormControl id="name" float="right">
                 <Button
                   variant="solid"
-                  bg={loading ? "#0D74FF" : "#0B0E3F"}
+                  bg={loading ? "#02054B" : "#0B0E3F"}
                   color="white"
                   type="submit"
                   _hover={{}}
