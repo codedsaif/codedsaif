@@ -8,6 +8,7 @@ import {
   Link,
   IconButton,
   Button,
+  TagRightIcon,
   Menu,
   MenuButton,
   MenuList,
@@ -22,32 +23,85 @@ import {
   HamburgerIcon,
 } from "@chakra-ui/react";
 import { IoMenu, IoCloseSharp } from "react-icons/io5";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { FaMoon, FaSun, FaExternalLinkAlt } from "react-icons/fa";
 import styles from "./Navbar.module.css";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 const Links = [
   "About",
-  "Tech Skills",
-  "Soft Skills",
+  [{ Skills: ["Tech Skills", "Soft Skills"] }],
   "Statistics",
   "Projects",
   "Contact",
 ];
 
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={`#${children}`}
-  >
-    {children}
-  </Link>
-);
+const accounts = [
+  {
+    label: "Phone",
+    link: "tel:+916397727906",
+  },
+  {
+    label: "Email",
+    link: "mailto:saifali27906@gmail.com",
+  },
+  {
+    label: "LinkedIn",
+    link: "https://www.linkedin.com/in/saif-ali-48a374231/",
+  },
+  {
+    label: "GitHub",
+    link: "https://github.com/isaifali",
+  },
+  {
+    label: "LeetCode",
+    link: "https://leetcode.com/isaifali/",
+  },
+];
+
+const NavLink = ({ children }) => {
+  let key = Object.keys(children[0])[0];
+  if (Array.isArray(children) && children.length > 0) {
+    return (
+      <Menu>
+        <MenuButton
+          px={2}
+          py={1}
+          rounded={"md"}
+          _hover={{
+            textDecoration: "none",
+            bg: useColorModeValue("gray.200", "gray.700"),
+          }}
+        >
+          {key}
+          <TagRightIcon verticalAlign={"middle"}>
+            <TiArrowSortedDown size="lg" />
+          </TagRightIcon>
+        </MenuButton>
+        <MenuList alignItems={"center"}>
+          {children[0].Skills.map((skill, index) => (
+            <MenuItem key={skill} as="a" href={`#${skill}`}>
+              {skill}
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Menu>
+    );
+  }
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={"md"}
+      _hover={{
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
+      }}
+      href={`#${children}`}
+    >
+      {children}
+    </Link>
+  );
+};
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -137,9 +191,21 @@ export default function Navbar() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
+                  {accounts.map((account, index) => {
+                    return (
+                      <Link
+                        _hover={{
+                          textDecoration: "none",
+                        }}
+                        href={`${account.link}`}
+                        isExternal={true}
+                      >
+                        <MenuItem>
+                          {account.label} &nbsp; <FaExternalLinkAlt />
+                        </MenuItem>
+                      </Link>
+                    );
+                  })}
                 </MenuList>
               </Menu>
             </Stack>
