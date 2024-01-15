@@ -19,6 +19,7 @@ import styles from "./Profile.module.css";
 import Saif_Ali_Professional_Picture from "@/assets/Saif_Ali_Professional_Picture.png";
 
 export default function Profile() {
+  const themeColor = useColorModeValue("#02054B", "#010225");
   return (
     <Container maxW={"7xl"} id="Profile">
       <Stack
@@ -43,7 +44,7 @@ export default function Profile() {
                 position: "absolute",
                 bottom: 1,
                 left: 0,
-                bg: useColorModeValue("#02054B", "#010225"),
+                bg: themeColor,
                 zIndex: -1,
                 color: "#DCE2FF",
                 borderRadius: "20px",

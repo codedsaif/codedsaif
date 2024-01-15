@@ -16,13 +16,13 @@ import { FcAssistant, FcPositiveDynamic, FcManager } from "react-icons/fc";
 const Feature = ({ title, text, icon }) => {
   return (
     <Stack
-      bg={useColorModeValue("gray.100", "gray.900")}
+      bg={useColorModeValue("#02054B", "#010225")}
       borderRadius={"md"}
       align={"center"}
       p={4}
       boxShadow={useColorModeValue(
-        "rgba(255, 255, 255, 0.8) 0px 5px 15px",
-        "rgba(255, 255, 255, 0.4) 0px 5px 15px"
+        "0 4px 8px rgba(2, 5, 75, 0.5)",
+        "0 4px 8px rgba(1, 2, 37, 0.5)"
       )}
       _hover={{ boxShadow: "none" }}
     >
@@ -39,7 +39,7 @@ const Feature = ({ title, text, icon }) => {
         {icon}
       </Flex>
       <Text fontWeight={700}>{title}</Text>
-      <Text color={"gray.600"}>{text}</Text>
+      <Text>{text}</Text>
     </Stack>
   );
 };
@@ -50,7 +50,6 @@ export default function SoftSkills() {
       id="Soft Skills"
       maxW={"7xl"}
       borderRadius="lg"
-      // bg={useColorModeValue("#02054B", "#010225")}
       color={"gray.500"}
       pb={{ base: 20, md: 28 }}
     >
@@ -67,7 +66,7 @@ export default function SoftSkills() {
           </Text>
         </Heading>
       </Stack>
-      <Box color={useColorModeValue("#0B0E3F", "#DCE2FF")}>
+      <Box color={useColorModeValue("gray.100", "#DCE2FF")}>
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
           <Feature
             icon={<Icon as={FcPositiveDynamic} w={10} h={10} />}
