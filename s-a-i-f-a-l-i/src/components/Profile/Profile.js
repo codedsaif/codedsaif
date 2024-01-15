@@ -39,12 +39,14 @@ export default function Profile() {
               _after={{
                 content: "''",
                 width: "full",
-                height: "30%",
+                height: "12%",
                 position: "absolute",
                 bottom: 1,
                 left: 0,
-                bg: "red.400",
+                bg: useColorModeValue("#02054B", "#010225"),
                 zIndex: -1,
+                color: "#DCE2FF",
+                borderRadius: "20px",
               }}
             >
               Saif Ali,
@@ -72,8 +74,9 @@ export default function Profile() {
                 fontWeight={"normal"}
                 px={6}
                 colorScheme={"red"}
-                bg={"red.400"}
-                _hover={{ bg: "red.500" }}
+                color="#DCE2FF"
+                bg={"#02054B"}
+                _hover={{ bg: "#010225" }}
               >
                 Talk to Me
               </Button>
@@ -102,7 +105,7 @@ export default function Profile() {
             top={"-20%"}
             left={0}
             zIndex={-1}
-            color={useColorModeValue("red.50", "red.400")}
+            color={useColorModeValue("#02054B", "#010225")}
           />
           <Box
             position={"relative"}
