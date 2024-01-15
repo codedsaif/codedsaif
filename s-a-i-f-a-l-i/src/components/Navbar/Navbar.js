@@ -71,6 +71,7 @@ const NavLink = ({ children }) => {
             textDecoration: "none",
             bg: "gray.400",
           }}
+          textAlign={"left"}
         >
           {key}
           <TagRightIcon verticalAlign={"middle"}>
