@@ -1,42 +1,122 @@
-<h1 align="center">Hi 👋, I'm Saif Ali</h1>
-<h3 align="center">A Passionate Full Stack Web Developer</h3>
-<h4 aligh="center">Uttar Pradesh, India</h4>
-<h4>Click <a href="https://isaifali.vercel.app" target="_blank" >https://isaifali.vercel.app</a> to explore my portfolio!</h4>
-<img align="right" alt="Coding" width="400" src="https://cdn.dribbble.com/users/1162077/screenshots/3848914/programmer.gif" />
+<a href="https://komarev.com/ghpvc/?username=codedsaif">
+  <img align="right" src="https://komarev.com/ghpvc/?username=codedsaif&label=Visitors&color=0e75b6&style=flat" alt="codedsaif Profile visitor" />
+</a>
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=isaifali&label=Profile%20views&color=0e75b6&style=flat" alt="isaifali" /> </p>
+[![wakatime](https://wakatime.com/badge/user/018d2c67-a849-4e2e-8313-8e222667b270.svg)](https://wakatime.com/@018d2c67-a849-4e2e-8313-8e222667b270)
 
-<p align="left"> <a href="https://twitter.com/s_a_i_f___a_l_i" target="blank"><img src="https://img.shields.io/twitter/follow/s_a_i_f___a_l_i?logo=twitter&style=for-the-badge" alt="s_a_i_f___a_l_i" /></a> </p>
+<!-- Intro  -->
+<h3 align="center">
+        <samp>&gt; Hey There!, I am
+                <b><a target="_blank" href="https://codedsaif.developersdrills.com/">Saif Ali</a></b>
+        </samp>
+</h3>
 
-- 👨‍💻 All of my projects are available at [https://isaifali.github.io](https://isaifali.github.io)
-
-- 💬 Ask me about **MERN**
-
-- 📫 How to reach me **saifali27906@gmail.com**
-
-- 📄 Know about my experiences [https://drive.google.com/drive/folders/1bmfz9w1chfSlcbgrGLAmttlch5FbYnHs?usp=sharing](https://drive.google.com/drive/folders/1bmfz9w1chfSlcbgrGLAmttlch5FbYnHs?usp=sharing)
-
-<h3 align="left">Connect with me:</h3>
-<p align="left">
-<a href="https://codepen.io/isaifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codepen.svg" alt="isaifali" height="30" width="40" /></a>
-<a href="https://dev.to/saifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/devto.svg" alt="saifali" height="30" width="40" /></a>
-<a href="https://twitter.com/s_a_i_f___a_l_i" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="s_a_i_f___a_l_i" height="30" width="40" /></a>
-<a href="https://linkedin.com/in/isaifali-48a374231" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="isaifali-48a374231" height="30" width="40" /></a>
-<a href="https://stackoverflow.com/users/18486179/saif-ali?tab=profile" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="18486179/saif-ali?tab=profile" height="30" width="40" /></a>
-<a href="https://codesandbox.com/https://codesandbox.io/u/isaifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codesandbox.svg" alt="https://codesandbox.io/u/isaifali" height="30" width="40" /></a>
-<a href="https://fb.com/x.s.a.i.f.a.l.i.x" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="x.s.a.i.f.a.l.i.x" height="30" width="40" /></a>
-<a href="https://instagram.com/s.a.i.f._.a.l.i" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="s.a.i.f._.a.l.i" height="30" width="40" /></a>
-<a href="https://medium.com/@isaifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/medium.svg" alt="@isaifali" height="30" width="40" /></a>
-<a href="https://www.hackerrank.com/s_a_i_f_a_l_i?hr_r=1" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="s_a_i_f_a_l_i?hr_r=1" height="30" width="40" /></a>
-<a href="https://www.leetcode.com/isaifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="isaifali" height="30" width="40" /></a>
-<a href="https://www.hackerearth.com/@isaifali" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerearth.svg" alt="@isaifali" height="30" width="40" /></a>
+<p align="center"> 
+  <samp>
+    <a href="https://www.google.com/search?q=codedsaif">「 Google Me 」</a>
+    <br>
+    「 I am a full stack web application developer from <b>India</b> 」
+    <br>
+    <br>
+  </samp>
 </p>
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://redux.js.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" alt="redux" width="40" height="40"/> </a> </p>
+<p align="center">
+ <a href="https://codedsaif.developersdrills.com/" target="blank">
+  <img src="https://img.shields.io/badge/Website-DC143C?style=for-the-badge&logo=medium&logoColor=white" alt="alsiam" />
+ </a>
+ <a href="www.linkedin.com/in/codedsaif/" target="_blank">
+  <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="alsiam"/>
+ </a>
+ <a href="https://twitter.com/codedsaif" target="_blank">
+  <img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" />
+ </a>
+ <a href="https://leetcode.com/isaifali/" target="_blank">
+  <img src="https://img.shields.io/badge/Leetcode-F0DB4F?style=for-the-badge&labelColor=black&logo=leetcode&logoColor=F0DB4F" alt="alsiam" />
+ </a>
+</p>
+<br />
 
-<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=isaifali&show_icons=true&locale=en&layout=compact" alt="isaifali" /></p>
+<!-- About Section -->
 
-<p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=isaifali&show_icons=true&locale=en" alt="isaifali" /></p>
+# About me
 
-<p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=isaifali&" alt="isaifali" /></p>
+<p>
+ <img align="right" width="320" src="./programmer.gif" alt="codedsaif gif" />
+  
+ ✌️ &emsp; Enjoy to do programming and sharing knowledge <br/><br/>
+ ❤️ &emsp; Love to writing code and learning new features<br/><br/>
+ 📧 &emsp; Reach me anytime: saifali27906@gmail.com<br/><br/>
+ 💬 &emsp; Ask me about anything [here](https://github.com/codedsaif/codedsaif/issues)
+
+</p>
+
+<br/>
+<br/>
+<br/>
+
+## Use To Code
+
+---
+
+---
+
+![Data Structures](https://img.shields.io/badge/Data%20Structures-555555?style=for-the-badge&labelColor=008080&logo=Data%Structures)
+![Algorithms](https://img.shields.io/badge/Algorithms-555555?style=for-the-badge&labelColor=4682B4&logo=Algorithms)
+![Javascript](https://img.shields.io/badge/Javascript-F0DB4F?style=for-the-badge&labelColor=black&logo=javascript&logoColor=F0DB4F)
+![Typescript](https://img.shields.io/badge/Typescript-007acc?style=for-the-badge&labelColor=black&logo=typescript&logoColor=007acc)
+![React](https://img.shields.io/badge/-React-61DBFB?style=for-the-badge&labelColor=black&logo=react&logoColor=61DBFB)
+![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Nodejs](https://img.shields.io/badge/Nodejs-3C873A?style=for-the-badge&labelColor=black&logo=node.js&logoColor=3C873A)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![SASS Badge](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-092749?style=for-the-badge&logo=tailwindcss&logoColor=06B6D4&labelColor=000000)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![Strapi](https://img.shields.io/badge/strapi-2E7EEA?style=for-the-badge&logo=strapi&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![VSCode](https://img.shields.io/badge/Visual_Studio-0078d7?style=for-the-badge&logo=visual%20studio&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&labelColor=black&logo=php&logoColor=777BB4)
+![WordPress](https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&labelColor=black&logo=wordpress&logoColor=21759B)
+
+<!-- ![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) -->
+<!-- ![React Query](https://img.shields.io/badge/-React_Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) -->
+<br/>
+
+## Top Open Source -
+
+[![codedsaif](https://github-readme-stats.vercel.app/api/pin/?username=codedsaif&repo=codedsaif&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/codedsaif/codedsaif)
+[![Register Login](https://github-readme-stats.vercel.app/api/pin/?username=codedsaif&repo=RegisterLogin&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/codedsaif/RegisterLogin)
+[![jobify](https://github-readme-stats.vercel.app/api/pin/?username=codedsaif&repo=jobify&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/codedsaif/jobify)
+[![Weather App](https://github-readme-stats.vercel.app/api/pin/?username=codedsaif&repo=weather_app-with_openweathermap&border_color=7F3FBF&bg_color=0D1117&title_color=C9D1D9&text_color=8B949E&icon_color=7F3FBF)](https://github.com/codedsaif/weather_app-with_openweathermap)
+
+<p align="left">
+  <a href="https://github.com/codedsaif?tab=repositories" target="_blank"><img alt="All Repositories" title="All Repositories" src="https://img.shields.io/badge/-All%20Repos-2962FF?style=for-the-badge&logo=koding&logoColor=white"/></a>
+</p>
+
+<br/>
+<hr/>
+<br/>
+
+<p align="center">
+  <a href="https://github.com/codedsaif">
+    <img src="https://github-readme-streak-stats.herokuapp.com/?user=codedsaif&theme=radical&border=7F3FBF&background=0D1117" alt="Saif Ali's GitHub streak"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/codedsaif">
+    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=codedsaif&theme=radical" alt="Saif Ali's GitHub Contribution"/>
+  </a>
+</p>
+
+<a> 
+    <a href="https://github.com/codedsaif"><img alt="Saif Ali's Github Stats" src="https://denvercoder1-github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&count_private=true&theme=react&border_color=7F3FBF&bg_color=0D1117&title_color=F85D7F&icon_color=F8D866" height="192px" width="49.5%"/></a>
+  <a href="https://github.com/codedsaif"><img alt="Saif Ali's Top Languages" src="https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&langs_count=8&layout=compact&theme=react&border_color=7F3FBF&bg_color=0D1117&title_color=F85D7F&icon_color=F8D866" height="192px" width="49.5%"/></a>
+  <br/>
+</a>
+
+![codedsaif's Graph](https://github-readme-activity-graph.vercel.app/graph?username=codedsaif&custom_title=Saif%20Ali's%20GitHub%20Activity%20Graph&bg_color=0D1117&color=7F3FBF&line=7F3FBF&point=7F3FBF&area_color=FFFFFF&title_color=FFFFFF&area=true)

@@ -135,7 +135,7 @@ export default function Contact() {
             py={2}
             alignItems="flex-start"
           >
-            <Link href="https://github.com/S-a-i-f-A-l-i">
+            <Link href="https://github.com/codedsaif/">
               <IconButton
                 aria-label="github"
                 variant="ghost"
@@ -145,7 +145,7 @@ export default function Contact() {
                 icon={<BsGithub size="28px" />}
               />
             </Link>
-            <Link href="https://leetcode.com/S-a-i-f-A-l-i/">
+            <Link href="https://leetcode.com/codedsaif/">
               <IconButton
                 aria-label="Leetcode"
                 variant="ghost"
@@ -155,7 +155,7 @@ export default function Contact() {
                 icon={<SiLeetcode size="28px" />}
               />
             </Link>
-            <Link href="https://www.linkedin.com/in/saif-a-l-i-48a374231/">
+            <Link href="https://www.linkedin.com/in/codedsaif/">
               <IconButton
                 aria-label="Linkedin"
                 variant="ghost"

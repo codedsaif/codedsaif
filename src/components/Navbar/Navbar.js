@@ -46,15 +46,15 @@ const accounts = [
   },
   {
     label: "LinkedIn",
-    link: "https://www.linkedin.com/in/saif-ali-48a374231/",
+    link: "www.linkedin.com/in/codedsaif/",
   },
   {
     label: "GitHub",
-    link: "https://github.com/isaifali",
+    link: "https://github.com/codedsaif/",
   },
   {
     label: "LeetCode",
-    link: "https://leetcode.com/isaifali/",
+    link: "https://leetcode.com/codedsaif/",
   },
 ];
 

@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { ChakraProvider, chakra } from "@chakra-ui/react";
+import Head from "next/head";
 import "./globals.css";
 // import { Layout } from "@/components";
 
@@ -15,6 +16,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ChakraProvider>
+          <Head>
+            <title>CodedSaif - Experienced Full Stack Web Developer</title>
+            <meta
+              name="description"
+              content="Explore the portfolio of CodedSaif, an experienced Full Stack Web Developer passionate about crafting cool and interactive websites using HTML, CSS, JavaScript, React, Next.js, Node.js, Express.js and MongoDB. Proficient in content management with Strapi and skilled in PHP and WordPress for themes and plugins. Always eager to learn and adapt to the latest technologies. Let's collaborate and build something awesome together!"
+            />
+            <meta
+              name="keywords"
+              content="codedsaif, Full Stack Web Developer, HTML, CSS, JavaScript, React, Next.js, Strapi, PHP, WordPress, Web Development Portfolio, Interactive Websites, Code Enthusiast, Technology Learner, codedsaif Portfolio, codedsaif Projects, codedsaif Coding Journey, codedsaif Tech Skills ,codedsaif Coding Expertise, codedsaif Coding Passion, codedsaif Tech Showcase, Web Development Enthusiast CodedSaif"
+            />
+          </Head>
           {/* <Layout>{children}</Layout> */}
           {children}
         </ChakraProvider>

@@ -100,7 +100,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://full-stack-project-cend.onrender.com",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i/jobify",
+      gitHubLink: "https://github.com/codedsaif/jobify",
     },
     {
       stack: "Frontend",
@@ -160,7 +160,7 @@ export default function Projects() {
       ],
       liveLink:
         "https://ikea-clone-4lny-f1tdnurt2-arpitsaraswat1997.vercel.app/",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i",
+      gitHubLink: "https://github.com/codedsaif",
     },
     {
       stack: "Frontend",
@@ -199,7 +199,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://snazzy-smakager-fb2e8f.netlify.app",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i",
+      gitHubLink: "https://github.com/codedsaif",
     },
     {
       stack: "Frontend",
@@ -242,7 +242,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://pharmeasyclone2022.netlify.app",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i",
+      gitHubLink: "https://github.com/codedsaif",
     },
 
     {
@@ -270,7 +270,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://sunny-stroopwafel-bdb2f1.netlify.app",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i",
+      gitHubLink: "https://github.com/codedsaif",
     },
     {
       stack: "Frontend",
@@ -289,7 +289,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://astonishing-biscotti-a93985.netlify.app",
-      gitHubLink: "https://github.com/S-a-i-f-A-l-i",
+      gitHubLink: "https://github.com/codedsaif",
     },
   ];
   return (
