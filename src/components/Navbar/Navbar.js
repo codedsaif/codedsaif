@@ -46,7 +46,7 @@ const accounts = [
   },
   {
     label: "LinkedIn",
-    link: "www.linkedin.com/in/codedsaif/",
+    link: "https://www.linkedin.com/in/codedsaif/",
   },
   {
     label: "GitHub",

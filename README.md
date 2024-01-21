@@ -2,7 +2,7 @@
   <img align="right" src="https://komarev.com/ghpvc/?username=codedsaif&label=Visitors&color=0e75b6&style=flat" alt="codedsaif Profile visitor" />
 </a>
 
-[![wakatime](https://wakatime.com/badge/user/018d2c67-a849-4e2e-8313-8e222667b270.svg)](https://wakatime.com/@018d2c67-a849-4e2e-8313-8e222667b270)
+[![wakatime](https://wakatime.com/badge/user/018d2ceb-ba32-464f-b411-cafac745f3a1.svg)](https://wakatime.com/@codedsaif)
 
 <!-- Intro  -->
 <h3 align="center">
@@ -25,7 +25,7 @@
  <a href="https://codedsaif.developersdrills.com/" target="blank">
   <img src="https://img.shields.io/badge/Website-DC143C?style=for-the-badge&logo=medium&logoColor=white" alt="alsiam" />
  </a>
- <a href="www.linkedin.com/in/codedsaif/" target="_blank">
+ <a href="https://www.linkedin.com/in/codedsaif/" target="_blank">
   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="alsiam"/>
  </a>
  <a href="https://twitter.com/codedsaif" target="_blank">
@@ -56,10 +56,6 @@
 <br/>
 
 ## Use To Code
-
----
-
----
 
 ![Data Structures](https://img.shields.io/badge/Data%20Structures-555555?style=for-the-badge&labelColor=008080&logo=Data%Structures)
 ![Algorithms](https://img.shields.io/badge/Algorithms-555555?style=for-the-badge&labelColor=4682B4&logo=Algorithms)
