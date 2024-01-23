@@ -160,7 +160,7 @@ export default function Projects() {
       ],
       liveLink:
         "https://ikea-clone-4lny-f1tdnurt2-arpitsaraswat1997.vercel.app/",
-      gitHubLink: "https://github.com/codedsaif",
+      gitHubLink: "https://github.com/codedsaif/ikea_clone",
     },
     {
       stack: "Frontend",
@@ -199,7 +199,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://snazzy-smakager-fb2e8f.netlify.app",
-      gitHubLink: "https://github.com/codedsaif",
+      gitHubLink: "https://github.com/codedsaif/BestBuy-clone",
     },
     {
       stack: "Frontend",
@@ -242,7 +242,7 @@ export default function Projects() {
         },
       ],
       liveLink: "https://pharmeasyclone2022.netlify.app",
-      gitHubLink: "https://github.com/codedsaif",
+      gitHubLink: "https://github.com/codedsaif/PharmEasy-Clone",
     },
 
     {
