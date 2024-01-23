@@ -79,7 +79,7 @@ export default function Project({
                   colorScheme="cyan"
                   mr={2}
                   mb={2}
-                  verticleAlign={"middle"}
+                  verticalAlign={"middle"}
                 >
                   <TagLeftIcon>
                     <FaHashtag size="md" />

@@ -1,9 +1,8 @@
 <a href="https://komarev.com/ghpvc/?username=codedsaif">
   <img align="right" src="https://komarev.com/ghpvc/?username=codedsaif&label=Visitors&color=0e75b6&style=flat" alt="codedsaif Profile visitor" />
 </a>
-
-[![wakatime](https://wakatime.com/badge/user/018d353e-a012-47ce-9b0f-f7decb4e8359.svg)](https://wakatime.com/@codedsaif)
-
+<!-- [![wakatime](https://wakatime.com/badge/user/018d353e-a012-47ce-9b0f-f7decb4e8359.svg)](https://wakatime.com/@codedsaif) -->
+<p>&nbsp;<p>
 <!-- Intro  -->
 <h3 align="center">
         <samp>&gt; Hey There!, I am
@@ -11,11 +10,11 @@
         </samp>
 </h3>
 
-<p align="center"> 
+<p style="max-width:640px; margin:auto;" align="center"> 
   <samp>
     <a href="https://www.google.com/search?q=codedsaif">「 Google Me 」</a>
     <br>
-    「 I am a full stack web application developer from <b>India</b> 」
+    「 Skilled Full Stack Web Developer adept at designing, developing, and maintaining projects. Demonstrates a continuous learning mindset, with a focus on adaptability in the dynamic digital realm. 」
     <br>
     <br>
   </samp>

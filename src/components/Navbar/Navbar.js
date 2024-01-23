@@ -103,6 +103,42 @@ const NavLink = ({ children }) => {
     </Link>
   );
 };
+const NavLinkSmall = ({ children }) => {
+  let key = Object.keys(children[0])[0];
+  if (Array.isArray(children) && children.length > 0) {
+    // return (
+    // <Menu>
+    //   <MenuButton
+    //     px={2}
+    //     py={1}
+    //     rounded={"md"}
+    //     _hover={{
+    //       textDecoration: "none",
+    //       bg: "gray.400",
+    //     }}
+    //     textAlign={"left"}
+    //   >
+    //     {key}
+    //     <TagRightIcon verticalAlign={"middle"}>
+    //       <TiArrowSortedDown size="lg" />
+    //     </TagRightIcon>
+    //   </MenuButton>
+    //   <MenuList alignItems={"center"}>
+    return children[0].Skills.map((skill, index) => (
+      <MenuItem key={skill} as="a" href={`#${skill}`}>
+        {skill}
+      </MenuItem>
+    ));
+    //   </MenuList>
+    // </Menu>
+    // );
+  }
+  return (
+    <MenuItem as="a" href={`#${children}`}>
+      {children}
+    </MenuItem>
+  );
+};
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -129,13 +165,23 @@ export default function Navbar() {
         )}
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <IconButton
+          {/* <IconButton
             size={"md"}
             icon={isOpen ? <CloseButton size="lg" /> : <IoMenu size="lg" />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
-          />
+          /> */}
+          <Menu>
+            <MenuButton display={{ md: "none" }} as={Button}>
+              {isOpen ? <CloseButton size="lg" /> : <IoMenu size="lg" />}
+            </MenuButton>
+            <MenuList>
+              {Links.map((link) => (
+                <NavLinkSmall key={link}>{link}</NavLinkSmall>
+              ))}
+            </MenuList>
+          </Menu>
           <HStack spacing={8} alignItems={"center"}>
             <Link
               href="#Profile"
@@ -214,7 +260,7 @@ export default function Navbar() {
           </Flex>
         </Flex>
 
-        {isOpen ? (
+        {/* {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {Links.map((link) => (
@@ -222,7 +268,7 @@ export default function Navbar() {
               ))}
             </Stack>
           </Box>
-        ) : null}
+        ) : null} */}
       </Box>
     </>
   );

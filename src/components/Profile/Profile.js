@@ -19,6 +19,15 @@ import styles from "./Profile.module.css";
 import Saif_Ali_Professional_Picture from "@/assets/Saif_Ali_Professional_Picture.png";
 
 export default function Profile() {
+  const openAndDownloadResume = () => {
+    let openResume =
+      "https://drive.google.com/file/d/1TY4QHsdz4FrapEZ96M5TSRhOuuXk6Sw8/view";
+    let downloadResume =
+      "https://drive.google.com/uc?export=download&id=1TY4QHsdz4FrapEZ96M5TSRhOuuXk6Sw8";
+    window.open(openResume, "_blank");
+    window.location.href = downloadResume;
+  };
+
   const themeColor = useColorModeValue("#02054B", "#010225");
   return (
     <Container maxW={"7xl"} id="Profile">
@@ -82,14 +91,15 @@ export default function Profile() {
                 Talk to Me
               </Button>
             </Link>
-            <Link
-              href="https://drive.google.com/file/d/1TY4QHsdz4FrapEZ96M5TSRhOuuXk6Sw8/view"
-              target="_blank"
+            <Button
+              rounded={"full"}
+              onClick={openAndDownloadResume}
+              size={"lg"}
+              fontWeight={"normal"}
+              px={6}
             >
-              <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
-                View Resume
-              </Button>
-            </Link>
+              View Resume
+            </Button>
           </Stack>
         </Stack>
         <Flex
@@ -122,10 +132,7 @@ export default function Profile() {
               align={"center"}
               w={{ base: "100%" }}
               // h={"80%"}
-              src={
-                Saif_Ali_Professional_Picture?.src
-                // "https://avatars.githubusercontent.com/u/108917329?s=400&u=4217e7472abcb19bb072bbbc5e78152265981989&v=4"
-              }
+              src={Saif_Ali_Professional_Picture?.src}
             />
           </Box>
         </Flex>
