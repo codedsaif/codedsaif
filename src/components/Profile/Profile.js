@@ -92,6 +92,7 @@ export default function Profile() {
               </Button>
             </Link>
             <Button
+              alignSelf={{ base: "flex-start" }}
               rounded={"full"}
               onClick={openAndDownloadResume}
               size={"lg"}
