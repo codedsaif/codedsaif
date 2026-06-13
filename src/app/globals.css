@@ -1,30 +1,244 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Class-based dark mode: toggled by adding `.dark` to <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ----------------------------------------------------------------------------
+   Static design tokens -> utilities like bg-brand, text-accent, font-sans
+---------------------------------------------------------------------------- */
+@theme {
+  --color-brand: #02054b;
+  --color-brand-deep: #010225;
+  --color-brand-soft: #dce2ff;
+  --color-accent: #f6993f;
+  --color-accent-strong: #ed8936;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+
+  --animate-shine: shine 8s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    infinite;
+  --animate-blink: blink 10s infinite;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+/* ----------------------------------------------------------------------------
+   Semantic tokens that flip between light & dark (utilities: bg-bg, text-fg,
+   text-muted, bg-surface, border-border, ...). `inline` keeps the runtime var
+   reference so the .dark override below actually re-themes them.
+---------------------------------------------------------------------------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef1f8;
+  --fg: #0b0e3f;
+  --muted: #6b7280;
+  --border: #e6e8f0;
+
+  --shine-a: #1a1f4b;
+  --shine-b: #6b7cff;
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.dark {
+  --bg: #05060d;
+  --surface: #0b0e1a;
+  --surface-2: #111426;
+  --fg: #dce2ff;
+  --muted: #8b93a7;
+  --border: #1c2030;
+
+  --shine-a: #aab4ff;
+  --shine-b: #ffffff;
+
+  color-scheme: dark;
 }
 
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* Keep anchored sections clear of the fixed navbar */
+  scroll-padding-top: 6rem;
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  background-image: radial-gradient(
+      55rem 55rem at 100% -10%,
+      color-mix(in oklab, var(--color-accent) 9%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      50rem 50rem at -10% 15%,
+      color-mix(in oklab, var(--color-brand) 12%, transparent),
+      transparent 55%
+    );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-accent) 35%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+   Animations (ported 1:1 from the old Chakra keyframes / CSS modules)
+---------------------------------------------------------------------------- */
+
+/* Neon flicker logo (was Navbar.module.css .logo) */
+.logo-neon {
+  color: #4a6cf7;
+  text-shadow: 0 0 5px #3e6bde, 0 0 15px #4dc6cd, 0 0 20px #3e6bde,
+    0 0 40px #4dc6cd;
+  animation: var(--animate-blink);
+}
+
+@keyframes blink {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    text-shadow: 0 0 5px #3b64c4, 0 0 15px #3b64c4, 0 0 20px #4a53cf,
+      0 0 40px #4a53cf, 0 0 60px #3b64c4;
+    color: #4a6cf7;
+  }
+  20%,
+  24%,
+  55% {
+    color: #31c8ea;
+    text-shadow: none;
+  }
+}
+
+/* Shimmering gradient text (was Profile.module.css .designation) */
+.text-shine {
+  background: linear-gradient(
+    90deg,
+    var(--shine-a),
+    var(--shine-b),
+    var(--shine-a)
+  );
+  background-size: 80%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: var(--animate-shine);
+}
+
+@keyframes shine {
+  0% {
+    background-position: -460%;
+  }
+  100% {
+    background-position: 460%;
+  }
+}
+
+/* Pulsing halo behind skill icons (was Skill.js keyframes) */
+.pulse-ring::before {
+  content: "";
+  position: relative;
+  display: block;
+  width: 300%;
+  height: 300%;
+  box-sizing: border-box;
+  margin-left: -100%;
+  margin-top: -100%;
+  border-radius: 50%;
+  background-color: var(--color-brand);
+  animation: var(--animate-pulse-ring);
+  animation-delay: -0.4s;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  40%,
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+/* Floating blob behind the hero portrait */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Scroll-reveal — PURE CSS, scroll-driven (zero JavaScript).
+   Default state is fully visible; supporting browsers animate it in on scroll.
+---------------------------------------------------------------------------- */
+.reveal {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+      will-change: opacity, transform;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .logo-neon,
+  .text-shine,
+  .pulse-ring::before,
+  [class*="animate-"] {
+    animation: none !important;
+  }
 }
