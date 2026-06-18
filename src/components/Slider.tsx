@@ -15,7 +15,7 @@ export default function Slider({ sliderData }: { sliderData: Slide[] }) {
   };
 
   return (
-    <div className="group relative h-[240px] w-full overflow-hidden">
+    <div className="group relative aspect-16/10 w-full overflow-hidden">
       <div
         ref={trackRef}
         className="flex h-full w-full snap-x snap-mandatory overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -23,18 +23,18 @@ export default function Slider({ sliderData }: { sliderData: Slide[] }) {
         {sliderData.map((slide, index) => (
           <div
             key={index}
-            className="relative h-full w-full flex-none snap-center"
+            className="relative h-full w-full flex-none snap-center overflow-hidden"
           >
             <Image
               src={slide.image}
               alt={slide.title}
               fill
               placeholder="blur"
-              sizes="(max-width: 768px) 100vw, 445px"
-              className="object-cover"
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover transition-transform duration-700 ease-smooth group-hover:scale-105"
             />
             <div className="absolute inset-x-0 bottom-0 flex justify-center bg-linear-to-t from-black/60 to-transparent p-3 pt-10">
-              <span className="text-sm font-semibold text-accent">
+              <span className="text-sm font-semibold text-accent-bright">
                 {slide.title}
               </span>
             </div>

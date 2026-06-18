@@ -37,7 +37,12 @@ export function SectionHeading({
             onDark ? "text-brand-soft/70" : "text-muted"
           )}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <span
+            className={cn(
+              "h-1.5 w-1.5 rounded-full",
+              onDark ? "bg-accent-bright" : "bg-accent"
+            )}
+          />
           {eyebrow}
         </span>
       )}
@@ -51,7 +56,9 @@ export function SectionHeading({
         {accent != null && (
           <>
             {" "}
-            <span className="text-accent">{accent}</span>
+            <span className={onDark ? "text-accent-bright" : "text-accent"}>
+              {accent}
+            </span>
           </>
         )}
       </h2>

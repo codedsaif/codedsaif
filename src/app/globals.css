@@ -4,29 +4,36 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ----------------------------------------------------------------------------
-   Static design tokens -> utilities like bg-brand, text-accent, font-sans
+   Static design tokens -> utilities like bg-brand, text-accent-bright, ease-smooth
+   PALETTE: "Indigo Noir" — deep slate-black neutrals + a violet accent.
 ---------------------------------------------------------------------------- */
 @theme {
-  --color-brand: #02054b;
-  --color-brand-deep: #010225;
-  --color-brand-soft: #dce2ff;
-  --color-accent: #f6993f;
-  --color-accent-strong: #ed8936;
+  /* Brand = deep indigo navy (tinted cards, dark buttons, hero underline) */
+  --color-brand: #1e1b4b;
+  --color-brand-deep: #15122e;
+  --color-brand-soft: #e0e7ff;
+
+  /* Always-vivid accent for use on dark / navy surfaces */
+  --color-accent-bright: #a78bfa;
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
 
-  --animate-shine: shine 8s linear infinite;
-  --animate-pulse-ring: pulse-ring 2.25s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+  /* Motion */
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --animate-shine: shine 6s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
     infinite;
-  --animate-blink: blink 10s infinite;
   --animate-float: float 7s ease-in-out infinite;
 }
 
 /* ----------------------------------------------------------------------------
-   Semantic tokens that flip between light & dark (utilities: bg-bg, text-fg,
-   text-muted, bg-surface, border-border, ...). `inline` keeps the runtime var
-   reference so the .dark override below actually re-themes them.
+   Semantic tokens that flip between light & dark. `inline` keeps the runtime
+   var reference so the .dark override below re-themes them.
+   --color-accent is theme-aware (darker on light bg, brighter on dark bg) so the
+   highlight colour always has contrast wherever it sits.
 ---------------------------------------------------------------------------- */
 @theme inline {
   --color-bg: var(--bg);
@@ -35,32 +42,37 @@
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-border: var(--border);
+  --color-accent: var(--accent);
 }
 
 :root {
-  --bg: #f6f7fb;
+  --bg: #f7f8fc;
   --surface: #ffffff;
-  --surface-2: #eef1f8;
-  --fg: #0b0e3f;
-  --muted: #6b7280;
-  --border: #e6e8f0;
+  --surface-2: #eef0f7;
+  --fg: #14152b;
+  --muted: #5a6072;
+  --border: #e4e7f1;
 
-  --shine-a: #1a1f4b;
-  --shine-b: #6b7cff;
+  --accent: #7c3aed; /* violet-600 — AA on light surfaces */
+
+  --shine-a: #6d28d9;
+  --shine-b: #4f46e5;
 
   color-scheme: light;
 }
 
 .dark {
-  --bg: #05060d;
-  --surface: #0b0e1a;
-  --surface-2: #111426;
-  --fg: #dce2ff;
-  --muted: #8b93a7;
-  --border: #1c2030;
+  --bg: #08090f;
+  --surface: #0e1018;
+  --surface-2: #171a25;
+  --fg: #e9eaf0;
+  --muted: #9499a8;
+  --border: #232734;
 
-  --shine-a: #aab4ff;
-  --shine-b: #ffffff;
+  --accent: #a78bfa; /* violet-400 — pops on dark surfaces */
+
+  --shine-a: #818cf8;
+  --shine-b: #e9d5ff;
 
   color-scheme: dark;
 }
@@ -74,8 +86,7 @@
 
 html {
   scroll-behavior: smooth;
-  /* Keep anchored sections clear of the fixed navbar */
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 6rem; /* clear the fixed navbar on anchor jumps */
 }
 
 body {
@@ -84,13 +95,13 @@ body {
   color: var(--fg);
   font-family: var(--font-sans);
   background-image: radial-gradient(
-      55rem 55rem at 100% -10%,
-      color-mix(in oklab, var(--color-accent) 9%, transparent),
+      48rem 48rem at 100% -10%,
+      color-mix(in oklab, var(--accent) 14%, transparent),
       transparent 60%
     ),
     radial-gradient(
-      50rem 50rem at -10% 15%,
-      color-mix(in oklab, var(--color-brand) 12%, transparent),
+      42rem 42rem at -10% 12%,
+      color-mix(in oklab, var(--color-brand-soft) 12%, transparent),
       transparent 55%
     );
   background-attachment: fixed;
@@ -98,44 +109,44 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition: background-color 0.45s var(--ease-smooth),
+      color 0.45s var(--ease-smooth);
+  }
+}
+
 ::selection {
-  background: color-mix(in oklab, var(--color-accent) 35%, transparent);
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+/* Full-page glide ONLY while toggling theme (class added briefly by the toggle).
+   Kept off normal interactions so hover stays snappy. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 0.45s var(--ease-smooth),
+    border-color 0.45s var(--ease-smooth), color 0.45s var(--ease-smooth),
+    fill 0.45s var(--ease-smooth) !important;
+  transition-delay: 0s !important;
 }
 
 /* ----------------------------------------------------------------------------
-   Animations (ported 1:1 from the old Chakra keyframes / CSS modules)
+   Accents & animations
 ---------------------------------------------------------------------------- */
 
-/* Neon flicker logo (was Navbar.module.css .logo) */
+/* Brand wordmark — premium indigo→violet gradient (replaces the neon flicker) */
 .logo-neon {
-  color: #4a6cf7;
-  text-shadow: 0 0 5px #3e6bde, 0 0 15px #4dc6cd, 0 0 20px #3e6bde,
-    0 0 40px #4dc6cd;
-  animation: var(--animate-blink);
+  background: linear-gradient(110deg, #818cf8 0%, #c4b5fd 45%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.01em;
 }
 
-@keyframes blink {
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
-    text-shadow: 0 0 5px #3b64c4, 0 0 15px #3b64c4, 0 0 20px #4a53cf,
-      0 0 40px #4a53cf, 0 0 60px #3b64c4;
-    color: #4a6cf7;
-  }
-  20%,
-  24%,
-  55% {
-    color: #31c8ea;
-    text-shadow: none;
-  }
-}
-
-/* Shimmering gradient text (was Profile.module.css .designation) */
+/* Shimmering gradient text (hero role) */
 .text-shine {
   background: linear-gradient(
     90deg,
@@ -161,7 +172,7 @@ body {
   }
 }
 
-/* Pulsing halo behind skill icons (was Skill.js keyframes) */
+/* Soft violet halo pulsing behind skill icons */
 .pulse-ring::before {
   content: "";
   position: relative;
@@ -172,7 +183,7 @@ body {
   margin-left: -100%;
   margin-top: -100%;
   border-radius: 50%;
-  background-color: var(--color-brand);
+  background-color: var(--color-accent-bright);
   animation: var(--animate-pulse-ring);
   animation-delay: -0.4s;
 }
@@ -183,10 +194,10 @@ body {
   }
   40%,
   50% {
-    opacity: 0.3;
+    opacity: 0.28;
   }
   100% {
-    opacity: 0.1;
+    opacity: 0.08;
   }
 }
 
@@ -202,8 +213,8 @@ body {
 }
 
 /* ----------------------------------------------------------------------------
-   Scroll-reveal — PURE CSS, scroll-driven (zero JavaScript).
-   Default state is fully visible; supporting browsers animate it in on scroll.
+   Scroll-reveal — PURE CSS, scroll-driven (zero JavaScript). Visible by default;
+   supporting browsers animate it in on scroll.
 ---------------------------------------------------------------------------- */
 .reveal {
   opacity: 1;
@@ -214,7 +225,7 @@ body {
     .reveal {
       animation: reveal-in linear both;
       animation-timeline: view();
-      animation-range: entry 5% cover 22%;
+      animation-range: entry 0% cover 26%;
       will-change: opacity, transform;
     }
   }
@@ -223,7 +234,7 @@ body {
 @keyframes reveal-in {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -235,10 +246,43 @@ body {
   html {
     scroll-behavior: auto;
   }
-  .logo-neon,
   .text-shine,
   .pulse-ring::before,
   [class*="animate-"] {
     animation: none !important;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Skills — interactive cursor spotlight (Skills.tsx). Pointer x/y is written to
+   --mx/--my on .skill-grid-surface; a radial-gradient layer follows the cursor.
+   Interaction-only, so reduced-motion just hides the layer entirely.
+---------------------------------------------------------------------------- */
+.skill-grid-surface {
+  --mx: 50%;
+  --my: -200px;
+  --spot-opacity: 0;
+}
+
+.skill-grid-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--spot-opacity);
+  background: radial-gradient(
+    22rem 22rem at var(--mx) var(--my),
+    color-mix(in oklab, var(--color-accent-bright) 22%, transparent),
+    color-mix(in oklab, var(--color-accent-bright) 6%, transparent) 40%,
+    transparent 68%
+  );
+  transition: opacity 0.45s var(--ease-smooth);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-grid-surface::before {
+    display: none;
   }
 }

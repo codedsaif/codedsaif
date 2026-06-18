@@ -30,6 +30,18 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <ThemeScript />
+        {/* Dev-only: unregister any stale service worker (e.g. a prior
+            vite-plugin-pwa SW left on this port) and clear its caches, so it
+            stops injecting /@vite/* and /dev-sw.js 404s. Gated to development so
+            it can never interfere with a real production PWA. */}
+        {process.env.NODE_ENV === "development" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                "if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister()})}).catch(function(){});if(self.caches){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k)})}).catch(function(){})}}",
+            }}
+          />
+        )}
       </head>
       <body>{children}</body>
     </html>

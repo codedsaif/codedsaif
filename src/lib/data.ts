@@ -79,11 +79,28 @@ export type NavLink =
 
 export type Account = { label: string; link: string };
 
+export type SkillCategory =
+  | "Frontend"
+  | "Backend & Databases"
+  | "Languages"
+  | "Tools & Platforms"
+  | "CS Foundations";
+
+// Display order for the grouped skills section.
+export const skillCategories: SkillCategory[] = [
+  "Frontend",
+  "Backend & Databases",
+  "Languages",
+  "Tools & Platforms",
+  "CS Foundations",
+];
+
 export type TechSkill = {
   name: string;
   image: StaticImageData;
   title: string;
   description: string;
+  category: SkillCategory;
 };
 
 export type SoftSkill = { title: string; text: string };
@@ -115,17 +132,14 @@ export const RESUME = {
 };
 
 // ---- Navbar -----------------------------------------------------------------
+// Order mirrors the page scroll flow: About → Projects → GitHub → Skills →
+// Experience → Contact.
 export const navLinks: NavLink[] = [
   { label: "About", href: "#About" },
-  {
-    label: "Skills",
-    children: [
-      { label: "Tech Skills", href: "#Tech Skills" },
-      { label: "Soft Skills", href: "#Soft Skills" },
-    ],
-  },
-  { label: "Statistics", href: "#Statistics" },
   { label: "Projects", href: "#Projects" },
+  { label: "Statistics", href: "#Statistics" },
+  { label: "Skills", href: "#Tech Skills" },
+  { label: "Experience", href: "#Experience" },
   { label: "Contact", href: "#Contact" },
 ];
 
@@ -148,7 +162,7 @@ export const profile = {
 
 // ---- About ------------------------------------------------------------------
 export const aboutParagraphs: string[] = [
-  "Welcome to my digital space! I'm Saif Ali, a passionate and results-driven Full Stack Developer. With six months of immersive experience in web development, I'm on a mission to bring creativity and functionality to the digital realm.",
+  "Welcome to my digital space! I'm Saif Ali, a passionate and results-driven Full Stack Developer. With over three years of hands-on experience in web development, I'm on a mission to bring creativity and functionality to the digital realm.",
   "My journey in the world of coding has equipped me with a diverse skill set encompassing HTML, CSS, Bootstrap, JavaScript, Java, Php, WordPress, React, Redux, JSON, GitHub, Node.js, MongoDB, Express.js, Context API, Axios, and Data Structures and Algorithms. This proficiency allows me to seamlessly navigate the complexities of both front-end and back-end development, weaving together engaging and interactive web experiences.",
   "Beyond the lines of code, I am a firm believer in continuous learning. Staying at the forefront of industry trends, I am committed to delivering cutting-edge solutions that resonate with the ever-evolving digital landscape.",
   "In addition to my technical prowess, I embrace a dynamic approach to life. An enthusiastic runner and bike rider, I believe in fostering a well-rounded perspective that fuels creativity and innovation.",
@@ -162,18 +176,21 @@ export const techSkills: TechSkill[] = [
     image: html,
     title: "HTML",
     description: "Standard markup language for creating web pages.",
+    category: "Frontend",
   },
   {
     name: "CSS",
     image: css,
     title: "CSS",
     description: "Stylesheet language for styling web pages.",
+    category: "Frontend",
   },
   {
     name: "Bootstrap",
     image: bootstrap,
     title: "Bootstrap Framework",
     description: "Front-end framework for building responsive websites.",
+    category: "Frontend",
   },
   {
     name: "Tailwind CSS",
@@ -181,36 +198,21 @@ export const techSkills: TechSkill[] = [
     title: "Tailwind CSS",
     description:
       "Utilizing a utility-first approach for efficient and consistent styling in web development.",
-  },
-  {
-    name: "Javascript",
-    image: javascript,
-    title: "JavaScript",
-    description: "High-level, interpreted programming language for the web.",
-  },
-  {
-    name: "Php",
-    image: php,
-    title: "PHP",
-    description: "Server-side scripting language for web development.",
-  },
-  {
-    name: "Java",
-    image: java,
-    title: "Java",
-    description: "Versatile, object-oriented programming language.",
+    category: "Frontend",
   },
   {
     name: "React",
     image: react,
     title: "React",
     description: "JavaScript library for building user interfaces.",
+    category: "Frontend",
   },
   {
     name: "Redux",
     image: redux,
     title: "Redux",
     description: "State management library for JavaScript applications.",
+    category: "Frontend",
   },
   {
     name: "Next",
@@ -218,54 +220,84 @@ export const techSkills: TechSkill[] = [
     title: "Next.js",
     description:
       "React framework for building production-ready web applications.",
+    category: "Frontend",
   },
   {
     name: "Node",
     image: node,
     title: "Node.js",
     description: "JavaScript runtime for server-side development.",
+    category: "Backend & Databases",
   },
   {
     name: "Express",
     image: express,
     title: "Express.js",
     description: "Web application framework for Node.js.",
+    category: "Backend & Databases",
   },
   {
     name: "Mongodb",
     image: mongodb,
     title: "MongoDB",
     description: "NoSQL database for scalable and flexible data storage.",
+    category: "Backend & Databases",
   },
   {
-    name: "Wordpress",
-    image: wordpress,
-    title: "WordPress",
-    description: "Open-source content management system.",
+    name: "Javascript",
+    image: javascript,
+    title: "JavaScript",
+    description: "High-level, interpreted programming language for the web.",
+    category: "Languages",
+  },
+  {
+    name: "Php",
+    image: php,
+    title: "PHP",
+    description: "Server-side scripting language for web development.",
+    category: "Languages",
+  },
+  {
+    name: "Java",
+    image: java,
+    title: "Java",
+    description: "Versatile, object-oriented programming language.",
+    category: "Languages",
   },
   {
     name: "Github",
     image: github,
     title: "GitHub",
     description: "Web-based platform for version control using Git.",
+    category: "Tools & Platforms",
   },
   {
     name: "Postman",
     image: postman,
     title: "Postman",
     description: "API development and testing tool.",
+    category: "Tools & Platforms",
   },
   {
-    name: "Algorithms",
-    image: algorithms,
-    title: "Algorithms",
-    description: "Step-by-step procedures for problem-solving.",
+    name: "Wordpress",
+    image: wordpress,
+    title: "WordPress",
+    description: "Open-source content management system.",
+    category: "Tools & Platforms",
   },
   {
     name: "Data Structures",
     image: dataStructures,
     title: "Data Structures",
     description: "Organized formats for storing and managing data.",
+    category: "CS Foundations",
+  },
+  {
+    name: "Algorithms",
+    image: algorithms,
+    title: "Algorithms",
+    description: "Step-by-step procedures for problem-solving.",
+    category: "CS Foundations",
   },
 ];
 
@@ -285,33 +317,33 @@ export const softSkills: SoftSkill[] = [
   },
 ];
 
-// ---- GitHub statistics (static images = zero JS dependency) -----------------
+// ---- GitHub statistics ------------------------------------------------------
+// Live widget images, re-themed to Indigo Noir: TRANSPARENT background
+// (bg_color=00000000) so the navy card shows through, with violet (a78bfa)
+// accents + light text — so they finally blend instead of shipping their own
+// pink "radical" theme. Order: contribution graph (hero) → stats → streak → langs.
 export const githubStats: GitHubStat[] = [
   {
-    src: "https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=codedsaif&theme=radical",
-    alt: "codedsaif's Activity Graph",
+    src: "https://ghchart.rshah.org/a78bfa/codedsaif",
+    alt: "codedsaif's GitHub contribution graph over the last year",
     full: true,
   },
   {
-    src: "https://github-readme-activity-graph.vercel.app/graph?username=codedsaif&custom_title=Saif%20Ali's%20GitHub%20Activity%20Graph&bg_color=0D1117&color=7F3FBF&line=7F3FBF&border=7F3FBF&point=7F3FBF&area_color=FFFFFF&title_color=FFFFFF&area=true",
-    alt: "Saif's GitHub streak",
-  },
-  {
-    src: "https://github-readme-streak-stats.herokuapp.com/?user=codedsaif&theme=radical&border=7F3FBF&background=0D1117",
-    alt: "Saif's GitHub streak",
-  },
-  {
-    src: "https://denvercoder1-github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&count_private=true&theme=react&border_color=7F3FBF&bg_color=0D1117&title_color=F85D7F&icon_color=F8D866",
-    alt: "Saif Ali's Github Stats",
-  },
-  {
-    src: "https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&langs_count=8&layout=compact&theme=react&border_color=7F3FBF&bg_color=0D1117&title_color=F85D7F&icon_color=F8D866",
-    alt: "Saif Ali's Top Languages",
-  },
-  {
-    src: "https://ghchart.rshah.org/7F3FBF/codedsaif",
-    alt: "codedsaif's GitHub contribution calendar",
+    src: "https://github-readme-activity-graph.vercel.app/graph?username=codedsaif&bg_color=00000000&color=e0e7ff&line=a78bfa&point=e0e7ff&area=true&area_color=a78bfa&hide_border=true&custom_title=%20&height=300",
+    alt: "codedsaif's GitHub activity graph over the last year",
     full: true,
+  },
+  {
+    src: "https://github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&hide_border=true&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1&icon_color=a78bfa",
+    alt: "codedsaif's GitHub stats — stars, commits, PRs and issues",
+  },
+  {
+    src: "https://streak-stats.demolab.com?user=codedsaif&hide_border=true&background=00000000&stroke=a78bfa&ring=a78bfa&fire=a78bfa&currStreakLabel=a78bfa&sideLabels=cbd5e1&currStreakNum=e0e7ff&sideNums=e0e7ff&dates=8b93a7&dayLabels=a78bfa",
+    alt: "codedsaif's GitHub contribution streak",
+  },
+  {
+    src: "https://github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&layout=compact&hide_border=true&langs_count=8&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1",
+    alt: "codedsaif's most-used languages",
   },
 ];
 
@@ -517,5 +549,138 @@ export const socials: Social[] = [
     label: "developersdrills-Whatsapp",
     href: "https://whatsapp.com/channel/0029VaECGW35Ui2asKs7wc2p",
     icon: FaWhatsapp,
+  },
+];
+
+// ---- Experience & Education (timeline) --------------------------------------
+// LinkedIn-style: each entry is an ORG that holds one or more ROLES (most recent
+// first). A single-role org renders flat; multi-role orgs nest the roles under a
+// sub-rail (e.g. Intern -> Engineer -> Team Lead).
+// NOTE: the two `work` orgs are DUMMY placeholders — replace org/period/location
+// and each role's title/period/summary/highlights/tech. Education is from your profile.
+export type TimelineRole = {
+  title: string;
+  period: string;
+  summary: string;
+  highlights: string[];
+  tech?: string[];
+};
+
+export type TimelineEntry = {
+  kind: "work" | "education";
+  org: string; // company or institution
+  period: string; // overall tenure at the org (or degree period)
+  location: string;
+  roles: TimelineRole[]; // 1+ roles; >1 renders the nested LinkedIn-style sub-rail
+  // Optional logo: `import acme from "@/assets/logos/acme.png"` then `logo: acme`.
+  // When omitted, the node shows a monogram of the org name instead.
+  logo?: StaticImageData;
+};
+
+export const experience: TimelineEntry[] = [
+  {
+    kind: "work",
+    org: "TechNova Solutions",
+    period: "Mar 2022 — Present · 3 yrs",
+    location: "Remote",
+    roles: [
+      {
+        title: "Team Lead",
+        period: "Jan 2024 — Present",
+        summary:
+          "Lead a squad of 5 building a B2B SaaS analytics platform used by 40k+ users.",
+        highlights: [
+          "Own the front-end architecture and the team's delivery roadmap.",
+          "Drove a Next.js + TypeScript migration that cut delivery time by ~35%.",
+          "Mentor 3 engineers through reviews, pairing, and growth plans.",
+        ],
+        tech: ["Next.js", "TypeScript", "React", "Node.js", "PostgreSQL"],
+      },
+      {
+        title: "Software Engineer",
+        period: "Sep 2022 — Dec 2023",
+        summary:
+          "Shipped customer-facing features across the stack on the analytics product.",
+        highlights: [
+          "Improved Core Web Vitals (LCP 4.1s → 1.6s) via code-splitting and image optimization.",
+          "Built a reusable component library adopted across 4 teams.",
+        ],
+        tech: ["React", "TypeScript", "Redux", "Node.js"],
+      },
+      {
+        title: "Software Engineer Intern",
+        period: "Mar 2022 — Aug 2022",
+        summary:
+          "Joined the platform team and ramped quickly into production feature work.",
+        highlights: [
+          "Delivered a settings dashboard end-to-end during the internship.",
+        ],
+        tech: ["React", "JavaScript", "REST"],
+      },
+    ],
+  },
+  {
+    kind: "work",
+    org: "Brightwave Labs",
+    period: "Jun 2021 — Feb 2022 · 9 mos",
+    location: "Bengaluru, India",
+    roles: [
+      {
+        title: "Software Engineer",
+        period: "Jun 2021 — Feb 2022",
+        summary:
+          "Built and shipped MERN-stack features in an Agile team of 6.",
+        highlights: [
+          "Delivered a real-time order-tracking module serving 12k daily users.",
+          "Cut API response times ~45% with Redis caching and query tuning.",
+        ],
+        tech: ["React", "Express", "MongoDB", "Redis", "Docker"],
+      },
+    ],
+  },
+  {
+    kind: "education",
+    org: "Masai School",
+    period: "2020 — 2021",
+    location: "Remote",
+    roles: [
+      {
+        title: "Full Stack Web Development",
+        period: "2020 — 2021",
+        summary:
+          "Intensive full-time program (1000+ hours) in modern web development.",
+        highlights: [
+          "Deep focus on Data Structures, Algorithms, and the MERN stack.",
+        ],
+      },
+    ],
+  },
+  {
+    kind: "education",
+    org: "Krishna Mahavidyalaya (M.J.P.R.U.)",
+    period: "2017 — 2020",
+    location: "India",
+    roles: [
+      {
+        title: "B.Com",
+        period: "2017 — 2020",
+        summary: "Bachelor of Commerce.",
+        highlights: [],
+      },
+    ],
+  },
+  {
+    kind: "education",
+    org: "S.A. Institute (N.I.E.I.T.)",
+    period: "2016 — 2017",
+    location: "India",
+    roles: [
+      {
+        title: "IT — O'Level",
+        period: "2016 — 2017",
+        summary: "Foundation diploma in information technology.",
+        highlights: [],
+      },
+    ],
   },
 ];
