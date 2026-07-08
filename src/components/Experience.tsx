@@ -255,7 +255,7 @@ export default function Experience() {
   }, [visible]);
 
   return (
-    <section id="Experience" className="relative overflow-hidden py-12 md:py-20">
+    <section id="Experience" className="relative overflow-hidden py-16 md:py-24">
       {/* ambient violet depth */}
       <div
         aria-hidden

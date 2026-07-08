@@ -107,6 +107,17 @@ body {
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  line-height: 1.6;
+}
+
+/* Modern text-wrapping — balanced headings (no orphan words) + prettier
+   paragraph ragging. Zero-specificity so component classes always win. */
+:where(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
+
+:where(p) {
+  text-wrap: pretty;
 }
 
 @media (prefers-reduced-motion: no-preference) {

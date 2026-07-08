@@ -37,7 +37,7 @@ export default function Projects() {
   }, [visible]);
 
   return (
-    <section id="Projects" className="relative overflow-hidden py-12 md:py-20">
+    <section id="Projects" className="relative overflow-hidden py-16 md:py-24">
       {/* ambient violet depth — seats the case-study rows in the Indigo Noir field */}
       <div
         aria-hidden

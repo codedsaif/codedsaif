@@ -85,7 +85,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="Tech Skills" className="relative overflow-hidden py-12 md:py-20">
+    <section id="Tech Skills" className="relative overflow-hidden py-16 md:py-24">
       {/* ambient violet depth — matches the Experience section */}
       <div
         aria-hidden

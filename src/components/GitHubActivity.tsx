@@ -59,7 +59,7 @@ function TileLabel({
 
 export default function GitHubActivity() {
   return (
-    <section id="Statistics" className="py-12 md:py-20">
+    <section id="Statistics" className="py-16 md:py-24">
       <Container>
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-brand px-4 py-6 ring-1 ring-white/5 dark:bg-brand-deep sm:px-8 sm:py-14 md:px-12 md:py-16">
