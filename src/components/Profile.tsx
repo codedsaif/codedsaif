@@ -61,7 +61,7 @@ export default function Profile() {
             <div className="order-2 flex flex-col items-center justify-center text-center lg:order-1 lg:items-start lg:text-left">
               {/* greeting eyebrow + "available for work" status pill */}
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <span className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.2em] text-muted">
+                <span className="inline-flex items-center gap-2 font-mono text-sm font-medium uppercase tracking-[0.18em] text-muted">
                   <span
                     aria-hidden
                     className="h-px w-8 bg-linear-to-r from-accent to-transparent"
@@ -78,7 +78,7 @@ export default function Profile() {
               </div>
 
               {/* BIG name (the page's largest heading) + kinetic role subtitle */}
-              <h1 className="mt-6 font-bold leading-[1.02] tracking-tight">
+              <h1 className="mt-6 font-display font-bold leading-[1.02] tracking-tight">
                 <span className="relative inline-block text-5xl sm:text-6xl md:text-7xl">
                   <span className="relative z-10 text-fg">{displayName}</span>
                   {/* refined indigo→violet highlight sweep behind the name */}
@@ -100,7 +100,7 @@ export default function Profile() {
               {/* location + soft-skill traits, on one compact chip line */}
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted">
-                  <span aria-hidden className="text-accent">
+                  <span aria-hidden className="font-mono text-accent">
                     {"//"}
                   </span>
                   {contact.location}
@@ -153,7 +153,7 @@ export default function Profile() {
 
               {/* SOCIAL row — easy contact */}
               <div className="mt-7 flex items-center gap-3">
-                <span className="text-xs font-medium uppercase tracking-[0.16em] text-muted/80">
+                <span className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted/80">
                   Find me
                 </span>
                 <span aria-hidden className="h-px w-6 bg-border" />

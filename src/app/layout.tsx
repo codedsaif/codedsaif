@@ -1,6 +1,30 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeScript } from "@/components/ui";
+
+// Type system — all self-hosted via next/font (zero runtime requests, zero CLS):
+//   Inter         → body / UI (the calm, hyper-legible neutral)
+//   Space Grotesk → display: hero name, section headings, wordmark (the character)
+//   JetBrains Mono→ uppercase micro-labels + code accents (the "developer" texture)
+// Inter & Space Grotesk are variable (weight omitted → one file covers every
+// weight used); JetBrains Mono is pinned to 500 since it only renders labels.
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-space-grotesk",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://codedsaif.developersdrills.com"),
@@ -27,7 +51,13 @@ export default function RootLayout({
 }) {
   return (
     // Dark by default; ThemeScript trims it to light only if the user opted in.
-    <html lang="en" className="dark" suppressHydrationWarning>
+    // The `.variable` classes only DEFINE the font CSS vars — ThemeScript only
+    // toggles `dark`, so they're safe to sit alongside it. `dark` stays first.
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <ThemeScript />
         {/* Dev-only: unregister any stale service worker (e.g. a prior

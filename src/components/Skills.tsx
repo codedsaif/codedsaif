@@ -103,7 +103,7 @@ export default function Skills() {
           accent="Proficiency"
           align="left"
         />
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
           Move your cursor across the grid — the tools I reach for light up as
           you go. Hover any tile for what it is and where I use it.
         </p>
@@ -113,7 +113,7 @@ export default function Skills() {
           ref={surfaceRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="skill-grid-surface relative mt-10 rounded-3xl border border-border bg-surface/30 p-4 backdrop-blur-sm md:mt-12 md:p-6 dark:bg-surface/20"
+          className="skill-grid-surface relative mt-10 rounded-3xl border border-border bg-surface/30 p-4 backdrop-blur-sm md:mt-14 md:p-6 dark:bg-surface/20"
         >
           <div className="relative z-10 flex flex-col gap-8 md:gap-10">
             {skillCategories.map((category) => {
@@ -132,7 +132,7 @@ export default function Skills() {
                     <div className="mb-4 flex items-center gap-3">
                       <h3
                         id={headingId}
-                        className="text-xs font-semibold uppercase tracking-[0.2em] text-muted"
+                        className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted"
                       >
                         {category}
                       </h3>

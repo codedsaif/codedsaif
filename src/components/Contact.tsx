@@ -123,7 +123,7 @@ export default function Contact() {
         <Reveal>
           {/* Rich navy panel (the original treatment) wrapping a two-column split:
               quiet details rail on the left, the glassy form card on the right. */}
-          <div className="relative overflow-hidden rounded-3xl bg-brand px-4 py-10 ring-1 ring-white/5 dark:bg-brand-deep sm:px-8 sm:py-16 md:px-12 md:py-20">
+          <div className="relative overflow-hidden rounded-3xl bg-brand px-4 py-8 ring-1 ring-white/5 dark:bg-brand-deep sm:px-8 sm:py-14 md:px-12 md:py-16">
             {/* ambient accent glows */}
             <div className="pointer-events-none absolute -right-28 -top-28 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-brand-soft/10 blur-3xl" />
@@ -140,7 +140,7 @@ export default function Contact() {
                   align="left"
                   onDark
                 />
-                <p className="mt-5 max-w-md text-lg leading-relaxed text-brand-soft/70">
+                <p className="mt-5 max-w-md text-base leading-relaxed text-brand-soft/70 sm:text-lg">
                   {contact.intro}
                 </p>
 

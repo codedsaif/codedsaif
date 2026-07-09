@@ -273,7 +273,7 @@ export default function Experience() {
           accent="& Education"
           align="left"
         />
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
+        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
           A chronological look at where I&apos;ve worked and studied.
         </p>
         <div className="mt-6 flex flex-wrap gap-2.5">
@@ -282,7 +282,7 @@ export default function Experience() {
         </div>
 
         {/* THE RAIL — one vertical line (uniform colour); cards sit to its right. */}
-        <div className="relative mt-12 md:mt-14">
+        <div className="relative mt-10 md:mt-14">
           <span
             aria-hidden
             className="pointer-events-none absolute bottom-2 left-5 top-2 w-px bg-linear-to-b from-accent/40 via-border to-border sm:left-6"

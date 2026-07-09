@@ -60,7 +60,7 @@ export default function Projects() {
             CSS-hidden so their images stay lazy and there's no layout flash. */}
         <div
           ref={listRef}
-          className="mt-12 flex flex-col divide-y divide-border md:mt-16"
+          className="mt-10 flex flex-col divide-y divide-border md:mt-14"
         >
           {projects.map((p, i) => (
             <Reveal

@@ -2,13 +2,17 @@ import type { IconType } from "react-icons";
 import {
   FiMapPin,
   FiCode,
+  FiFolder,
+  FiLayers,
+  FiBriefcase,
+  FiGitBranch,
+  FiBookOpen,
+  FiActivity,
+  FiAward,
   FiZap,
   FiMessageCircle,
   FiUsers,
   FiArrowUpRight,
-  FiFolder,
-  FiLayers,
-  FiBriefcase,
 } from "react-icons/fi";
 import { Container, Reveal, SectionHeading, Button } from "@/components/ui";
 import {
@@ -23,223 +27,164 @@ import {
 } from "@/lib/data";
 
 // Prose is NEVER rewritten — only arranged. The first paragraph is the prominent
-// lead in the dominant tile; the rest become a calm, two-column "story" tile so
-// the bio never reads as a single wall of text.
+// lead; the rest become labelled "story" chapters so the bio reads as scannable
+// cards instead of one wall of text.
 const [lead, ...story] = aboutParagraphs;
 
-// `profile.role` ships with a trailing "!" — trim it for chip / focus use.
+// `profile.role` ships with a trailing "!" — trim it for chip use.
 const focus = profile.role.replace(/!+$/, "");
 
-// Role / location chips — small monochrome accent icons.
-type Fact = { icon: IconType; label: string };
-
-const facts: Fact[] = [
-  { icon: FiCode, label: focus },
-  { icon: FiMapPin, label: contact.location },
-];
-
-// Derived, no-invented-claims stats — counts come straight from data so they
-// stay correct as the portfolio grows.
+// Derived proof — counts come straight from data so they stay correct as the
+// portfolio grows. No invented claims.
 const workCount = experience.filter((e) => e.kind === "work").length;
 
 type Stat = { value: string; label: string; icon: IconType };
-
 const stats: Stat[] = [
   { value: `${projects.length}`, label: "Projects", icon: FiFolder },
   { value: `${techSkills.length}`, label: "Technologies", icon: FiLayers },
   { value: `${workCount}`, label: "Companies", icon: FiBriefcase },
 ];
 
-// Soft skills folded in on-brand with accent-tinted MONOCHROME icons (by title).
+// Structural labels for the remaining bio paragraphs — arranged, not rewritten.
+// (Falls back gracefully if a paragraph is ever added.)
+const storyMeta: { label: string; icon: IconType }[] = [
+  { label: "My journey", icon: FiGitBranch },
+  { label: "Always learning", icon: FiBookOpen },
+  { label: "Beyond the code", icon: FiActivity },
+  { label: "Education", icon: FiAward },
+];
+
+// Soft skills → compact "how I work" chips (icon by title).
 const traitIcons: Record<string, IconType> = {
   Adaptability: FiZap,
   Communication: FiMessageCircle,
   Teamwork: FiUsers,
 };
 
-// Shared tile chrome — glass surface on the navy panel, exaggerated rounding,
-// subtle hover lift. One source of truth so every tile feels cohesive.
-const tile =
-  "group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-300 ease-smooth hover:-translate-y-1 hover:border-accent-bright/40 hover:bg-white/[0.07]";
+// Shared card chrome — subtle surface tile on the page background, matching the
+// Skills / Experience sections so the whole mid-page reads as one system.
+const card =
+  "rounded-3xl border border-border bg-surface p-6 shadow-sm shadow-black/5 dark:shadow-black/20 sm:p-7";
 
 export default function About() {
   return (
-    <section id="About" className="py-16 md:py-24">
+    <section id="About" className="relative overflow-hidden py-16 md:py-24">
+      {/* ambient violet depth — matches the Skills / Experience sections */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -left-40 top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+        <div className="absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-soft/5 blur-3xl dark:bg-accent-bright/5" />
+      </div>
+
       <Container>
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl bg-brand px-4 py-6 ring-1 ring-white/5 dark:bg-brand-deep sm:px-8 sm:py-14 md:px-12 md:py-16">
-            {/* ambient accent glows — matches the Contact / Profile treatment */}
-            <div className="pointer-events-none absolute -right-28 -top-28 h-80 w-80 rounded-full bg-accent/25 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-brand-soft/10 blur-3xl" />
-            <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-bright/5 blur-3xl" />
-
-            {/* BENTO GRID — asymmetric, one dominant tile, generous gutters.
-                Collapses cleanly to a single column on mobile. */}
-            <div className="relative grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-6">
-              {/* ── DOMINANT LEAD TILE (2x wide, 2x tall on desktop) ─────── */}
-              <div
-                className={`${tile} p-5 sm:p-7 md:p-9 md:col-span-4 md:row-span-2`}
-              >
-                {/* faint dotted-grid texture */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-50 bg-[radial-gradient(circle_at_center,rgba(167,139,250,0.16)_1px,transparent_1px)] bg-size-[22px_22px]"
-                />
-                {/* soft violet bloom behind the signature mark */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-6 -top-6 h-44 w-44 rounded-full bg-accent-bright/10 blur-3xl"
-                />
-                {/* code-comment "SA" signature monogram — the non-photo visual hook,
-                    reusing the hero's text-shine so the two sections feel related. */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute right-5 top-5 select-none text-right"
+          {/* ── ROW 1: narrative left, at-a-glance card right ─────────── */}
+          <div className="grid gap-8 lg:grid-cols-[3fr_2fr] lg:gap-12">
+            <div className="flex flex-col">
+              <SectionHeading
+                eyebrow="Who I am"
+                title="About"
+                accent="Me"
+                align="left"
+              />
+              {/* LEAD — first paragraph, verbatim, with an editorial accent rule */}
+              <p className="mt-6 max-w-xl text-pretty border-l-2 border-accent/60 pl-5 text-xl font-medium leading-relaxed text-fg/90 sm:text-2xl">
+                {lead}
+              </p>
+              <div className="mt-8">
+                <Button
+                  href={RESUME.view}
+                  target="_blank"
+                  variant="soft"
+                  size="lg"
+                  aria-label="View resume (opens in a new tab)"
+                  className="group/cta"
                 >
-                  <span className="block font-mono text-[0.7rem] tracking-tight text-accent-bright/70">
-                    {"/* "}
-                    <span className="text-brand-soft/40">about</span>
-                    {" */"}
-                  </span>
-                  <span className="text-shine block font-mono text-4xl font-bold leading-none tracking-tighter sm:text-5xl">
-                    SA
-                  </span>
-                  <span className="block font-mono text-[0.7rem] tracking-wide text-brand-soft/40">
-                    {"<"}
-                    <span className="text-accent-bright/70">developer</span>
-                    {" />"}
-                  </span>
-                </div>
-
-                {/* content sits above the decorative motifs */}
-                <div className="relative z-10 flex h-full flex-col gap-6">
-                  <SectionHeading
-                    eyebrow="Who I am"
-                    title="About"
-                    accent="Me"
-                    align="left"
-                    onDark
-                  />
-
-                  {/* role / location chips */}
-                  <ul className="flex flex-wrap gap-2.5">
-                    {facts.map(({ icon: Icon, label }) => (
-                      <li
-                        key={label}
-                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-brand-soft/85"
-                      >
-                        <Icon
-                          size={15}
-                          aria-hidden
-                          className="text-accent-bright"
-                        />
-                        {label}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* prominent LEAD paragraph (first bio paragraph, verbatim) —
-                      an accent edge gives it weight without being a text wall. */}
-                  <p className="max-w-2xl text-balance border-l-2 border-accent-bright/50 pl-5 text-xl font-medium leading-relaxed text-brand-soft/95 sm:text-2xl">
-                    {lead}
-                  </p>
-
-                  <div className="mt-auto pt-1">
-                    <Button
-                      href={RESUME.view}
-                      target="_blank"
-                      variant="soft"
-                      size="lg"
-                      aria-label="View resume (opens in a new tab)"
-                      className="group/cta"
-                    >
-                      View Resume
-                      <FiArrowUpRight
-                        size={18}
-                        aria-hidden
-                        className="transition-transform duration-300 ease-spring group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                      />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* ── STATS TILE (tall, beside the lead) ───────────────────── */}
-              <div
-                className={`${tile} flex flex-col justify-center gap-5 p-5 sm:p-7 md:col-span-2 md:row-span-2`}
-              >
-                <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-soft/70">
-                  <span
+                  View Resume
+                  <FiArrowUpRight
+                    size={18}
                     aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-accent-bright"
+                    className="transition-transform duration-300 ease-spring group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
                   />
-                  By the numbers
-                </h3>
-                <dl className="flex flex-col gap-5">
-                  {stats.map(({ value, label, icon: Icon }) => (
-                    <div key={label} className="flex items-center gap-4">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-accent-bright/10 text-accent-bright ring-1 ring-white/10 transition-all duration-300 ease-smooth group-hover:ring-accent-bright/30">
-                        <Icon size={20} aria-hidden />
-                      </span>
-                      <div className="flex flex-col">
-                        <dt className="text-4xl font-semibold tabular-nums leading-none text-accent-bright">
-                          {value}
-                        </dt>
-                        <dd className="mt-1 text-xs font-medium uppercase tracking-wide text-brand-soft/60">
-                          {label}
-                        </dd>
-                      </div>
-                    </div>
-                  ))}
-                </dl>
+                </Button>
               </div>
+            </div>
 
-              {/* ── SOFT-SKILL TRAIT TILES (the "How I work" trio) ───────── */}
+            {/* AT A GLANCE — stats + role/location: the section's visual anchor */}
+            <div className={`${card} flex flex-col justify-center`}>
+              <h3 className="flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted">
+                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
+                At a glance
+              </h3>
+              <dl className="mt-6 grid grid-cols-3 gap-4">
+                {stats.map(({ value, label, icon: Icon }) => (
+                  <div key={label} className="flex flex-col gap-1">
+                    <Icon size={16} aria-hidden className="text-accent" />
+                    <dt className="text-3xl font-semibold tabular-nums leading-none text-fg sm:text-4xl">
+                      {value}
+                    </dt>
+                    <dd className="text-xs font-medium uppercase tracking-wide text-muted">
+                      {label}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
+                <p className="flex items-center gap-2.5 text-sm text-muted">
+                  <FiCode size={16} aria-hidden className="shrink-0 text-accent" />
+                  {focus}
+                </p>
+                <p className="flex items-center gap-2.5 text-sm text-muted">
+                  <FiMapPin size={16} aria-hidden className="shrink-0 text-accent" />
+                  {contact.location}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ── ROW 2: the story — labelled chapters, scannable ───────── */}
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 md:mt-14">
+            {story.map((paragraph, i) => {
+              const meta = storyMeta[i] ?? { label: "More", icon: FiCode };
+              const Icon = meta.icon;
+              return (
+                <div
+                  key={i}
+                  className={`group ${card} transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-accent/40`}
+                >
+                  <h3 className="flex items-center gap-3 text-sm font-semibold text-fg">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/15 transition-colors duration-300 ease-smooth group-hover:bg-accent/15">
+                      <Icon size={17} aria-hidden />
+                    </span>
+                    {meta.label}
+                  </h3>
+                  <p className="mt-4 text-pretty leading-relaxed text-muted">
+                    {paragraph}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* ── ROW 3: how I work — soft skills as compact chips ──────── */}
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <span className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted">
+              How I work
+            </span>
+            <span aria-hidden className="hidden h-px flex-1 bg-border sm:block" />
+            <ul className="flex flex-wrap gap-2.5">
               {softSkills.map((skill) => {
                 const Icon = traitIcons[skill.title] ?? FiZap;
                 return (
-                  <div
+                  <li
                     key={skill.title}
-                    className={`${tile} flex flex-col gap-4 p-5 sm:p-6 md:col-span-2`}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-fg/80"
                   >
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-bright/10 text-accent-bright ring-1 ring-white/10 transition-all duration-300 ease-smooth group-hover:bg-accent-bright/20 group-hover:ring-accent-bright/40">
-                      <Icon size={22} aria-hidden />
-                    </span>
-                    <h3 className="text-lg font-semibold text-brand-soft">
-                      {skill.title}
-                    </h3>
-                    <p className="leading-relaxed text-brand-soft/70">
-                      {skill.text}
-                    </p>
-                  </div>
+                    <Icon size={15} aria-hidden className="text-accent" />
+                    {skill.title}
+                  </li>
                 );
               })}
-
-              {/* ── STORY TILE — remaining bio paragraphs, calm & chunked ── */}
-              <div
-                className={`${tile} flex flex-col gap-6 p-5 sm:p-7 md:p-9 md:col-span-6`}
-              >
-                <h3 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-soft/70">
-                  <span
-                    aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-accent-bright"
-                  />
-                  My story
-                </h3>
-                {/* two comfortable columns on wide screens so it never reads as a
-                    tall wall of text; single column on mobile. (verbatim) */}
-                <div className="grid gap-x-12 gap-y-6 lg:grid-cols-2">
-                  {story.map((paragraph, i) => (
-                    <p
-                      key={i}
-                      className="text-pretty leading-relaxed text-brand-soft/75"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </ul>
           </div>
         </Reveal>
       </Container>

@@ -117,7 +117,16 @@ export type Project = {
   gitHubLink: string;
 };
 
-export type GitHubStat = { src: string; alt: string; full?: boolean };
+// `kind` drives the widget's span + framing inside the dense bento grid:
+//   "hero"    → full-width contribution calendar (scrolls horizontally on mobile)
+//   "wide"    → half-width transparent glass tile (activity graph)
+//   "boxed"   → half-width; the widget ships its OWN opaque theme box (profile summary)
+//   "compact" → third-width transparent glass tile (stats · streak · languages)
+export type GitHubStat = {
+  src: string;
+  alt: string;
+  kind: "hero" | "wide" | "boxed" | "compact";
+};
 
 export type Social = { label: string; href: string; icon: IconType };
 
@@ -318,32 +327,46 @@ export const softSkills: SoftSkill[] = [
 ];
 
 // ---- GitHub statistics ------------------------------------------------------
-// Live widget images, re-themed to Indigo Noir: TRANSPARENT background
-// (bg_color=00000000) so the navy card shows through, with violet (a78bfa)
-// accents + light text — so they finally blend instead of shipping their own
-// pink "radical" theme. Order: contribution graph (hero) → stats → streak → langs.
+// Six live widget images. Five are re-themed to Indigo Noir: TRANSPARENT
+// background (bg_color=00000000) so the navy card shows through, with violet
+// (a78bfa) accents + light text. The sixth — the profile-summary card — has no
+// transparent+violet option, so it ships the "tokyonight" theme (bg #1a1b27,
+// the closest of all 60+ themes to this card's brand-deep #15122e) so its own
+// opaque box melts into the dark card instead of clashing like the old pink
+// "radical". Order feeds the dense bento grid in GitHubActivity top-to-bottom:
+//   Row 1  → contribution calendar (hero, full width)
+//   Row 2  → activity graph + profile summary (two wide half-width tiles)
+//   Row 3  → stats · streak · languages (three compact third-width tiles)
 export const githubStats: GitHubStat[] = [
   {
     src: "https://ghchart.rshah.org/a78bfa/codedsaif",
     alt: "codedsaif's GitHub contribution graph over the last year",
-    full: true,
+    kind: "hero",
   },
   {
     src: "https://github-readme-activity-graph.vercel.app/graph?username=codedsaif&bg_color=00000000&color=e0e7ff&line=a78bfa&point=e0e7ff&area=true&area_color=a78bfa&hide_border=true&custom_title=%20&height=300",
     alt: "codedsaif's GitHub activity graph over the last year",
-    full: true,
+    kind: "wide",
+  },
+  {
+    src: "https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=codedsaif&theme=tokyonight",
+    alt: "codedsaif's GitHub profile summary — join date, contributions and activity",
+    kind: "boxed",
   },
   {
     src: "https://github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&hide_border=true&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1&icon_color=a78bfa",
     alt: "codedsaif's GitHub stats — stars, commits, PRs and issues",
+    kind: "compact",
   },
   {
     src: "https://streak-stats.demolab.com?user=codedsaif&hide_border=true&background=00000000&stroke=a78bfa&ring=a78bfa&fire=a78bfa&currStreakLabel=a78bfa&sideLabels=cbd5e1&currStreakNum=e0e7ff&sideNums=e0e7ff&dates=8b93a7&dayLabels=a78bfa",
     alt: "codedsaif's GitHub contribution streak",
+    kind: "compact",
   },
   {
     src: "https://github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&layout=compact&hide_border=true&langs_count=8&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1",
     alt: "codedsaif's most-used languages",
+    kind: "compact",
   },
 ];
 
