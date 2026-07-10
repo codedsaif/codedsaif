@@ -1,190 +1,228 @@
-import type { IconType } from "react-icons";
-import {
-  FiMapPin,
-  FiCode,
-  FiFolder,
-  FiLayers,
-  FiBriefcase,
-  FiGitBranch,
-  FiBookOpen,
-  FiActivity,
-  FiAward,
-  FiZap,
-  FiMessageCircle,
-  FiUsers,
-  FiArrowUpRight,
-} from "react-icons/fi";
-import { Container, Reveal, SectionHeading, Button } from "@/components/ui";
+import { Container, Reveal, SectionHeading, Tooltip } from "@/components/ui";
 import {
   aboutParagraphs,
   softSkills,
-  contact,
-  profile,
   projects,
   techSkills,
   experience,
-  RESUME,
 } from "@/lib/data";
 
-// Prose is NEVER rewritten — only arranged. The first paragraph is the prominent
-// lead; the rest become labelled "story" chapters so the bio reads as scannable
-// cards instead of one wall of text.
+/* ----------------------------------------------------------------------------
+   Content arrangement — prose is NEVER rewritten, only arranged. The first
+   paragraph is the editorial lead; the remaining three become numbered
+   chapters below the fold line.
+---------------------------------------------------------------------------- */
 const [lead, ...story] = aboutParagraphs;
 
-// `profile.role` ships with a trailing "!" — trim it for chip use.
-const focus = profile.role.replace(/!+$/, "");
+const chapterLabels = [
+  "Across the stack",
+  "Always learning",
+  "Beyond the code",
+];
 
-// Derived proof — counts come straight from data so they stay correct as the
-// portfolio grows. No invented claims.
+// Derived count — computed from data so it stays correct as the site grows.
 const workCount = experience.filter((e) => e.kind === "work").length;
 
-type Stat = { value: string; label: string; icon: IconType };
-const stats: Stat[] = [
-  { value: `${projects.length}`, label: "Projects", icon: FiFolder },
-  { value: `${techSkills.length}`, label: "Technologies", icon: FiLayers },
-  { value: `${workCount}`, label: "Companies", icon: FiBriefcase },
-];
+/* ----------------------------------------------------------------------------
+   THE ANCHOR — `saif.ts`: an identity card rendered as real TypeScript.
+   Every value is verbatim from @/lib/data or a derived count. Syntax colours
+   use existing tokens only (accent for keywords + numbers, emerald for
+   strings — echoing the hero's availability badge; light mode stays at
+   emerald-700 for AA contrast at this size).
+---------------------------------------------------------------------------- */
+type TokenKind = "kw" | "id" | "key" | "str" | "num" | "punc" | "comment";
 
-// Structural labels for the remaining bio paragraphs — arranged, not rewritten.
-// (Falls back gracefully if a paragraph is ever added.)
-const storyMeta: { label: string; icon: IconType }[] = [
-  { label: "My journey", icon: FiGitBranch },
-  { label: "Always learning", icon: FiBookOpen },
-  { label: "Beyond the code", icon: FiActivity },
-  { label: "Education", icon: FiAward },
-];
-
-// Soft skills → compact "how I work" chips (icon by title).
-const traitIcons: Record<string, IconType> = {
-  Adaptability: FiZap,
-  Communication: FiMessageCircle,
-  Teamwork: FiUsers,
+type Token = {
+  text: string;
+  kind: TokenKind;
+  /** One-sentence excerpt revealed on hover/focus (soft skills only). */
+  tip?: string;
 };
 
-// Shared card chrome — subtle surface tile on the page background, matching the
-// Skills / Experience sections so the whole mid-page reads as one system.
-const card =
-  "rounded-3xl border border-border bg-surface p-6 shadow-sm shadow-black/5 dark:shadow-black/20 sm:p-7";
+const kw = (text: string): Token => ({ text, kind: "kw" });
+const id = (text: string): Token => ({ text, kind: "id" });
+const key = (text: string): Token => ({ text, kind: "key" });
+const num = (value: number): Token => ({ text: String(value), kind: "num" });
+const punc = (text: string): Token => ({ text, kind: "punc" });
+const comment = (text: string): Token => ({ text, kind: "comment" });
+const str = (text: string, tip?: string): Token => ({
+  text: `"${text}"`,
+  kind: "str",
+  tip,
+});
+
+// Compact reveal: only the FIRST sentence of each soft-skill text — no walls.
+const firstSentence = (text: string) => `${text.split(". ")[0]}.`;
+
+// NOTE: the trait tooltips render inside the card's overflow-hidden body and
+// open UPWARD — keep the traits in the lower half of codeLines or the popup
+// will be clipped by the card edge.
+// Only facts NOT already stated in the surrounding prose live here — the lead
+// beside the card covers role/experience; chapters 02/03 cover learning and
+// life beyond code. The card carries the derived counts + the trait tooltips.
+const codeLines: Token[][] = [
+  [comment("// sourced from site data")],
+  [kw("const"), id(" saif"), punc(" = {")],
+  [key("  projects"), punc(": "), num(projects.length), punc(",")],
+  [key("  technologies"), punc(": "), num(techSkills.length), punc(",")],
+  [key("  companies"), punc(": "), num(workCount), punc(",")],
+  [key("  traits"), punc(": [")],
+  ...softSkills.map((skill) => [
+    punc("    "),
+    str(skill.title, firstSentence(skill.text)),
+    punc(","),
+  ]),
+  [punc("  ],")],
+  [punc("}"), kw(" as const"), punc(";")],
+];
+
+const tokenClass: Record<TokenKind, string> = {
+  kw: "text-accent",
+  id: "font-medium text-fg",
+  key: "text-fg/85",
+  str: "text-emerald-700 dark:text-emerald-400",
+  num: "font-semibold text-accent",
+  punc: "text-muted",
+  comment: "italic text-muted",
+};
+
+function CodeToken({ token }: { token: Token }) {
+  if (!token.tip) {
+    return <span className={tokenClass[token.kind]}>{token.text}</span>;
+  }
+  // Soft-skill strings get a CSS-only excerpt reveal (hover + keyboard focus).
+  return (
+    <Tooltip
+      className="rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+      label={
+        <span className="block whitespace-normal font-sans text-xs font-normal not-italic leading-relaxed">
+          {token.tip}
+        </span>
+      }
+    >
+      <span
+        className={`${tokenClass[token.kind]} cursor-help underline decoration-accent/40 decoration-dotted decoration-1 underline-offset-4 transition-colors duration-300 ease-smooth hover:text-accent`}
+      >
+        {token.text}
+      </span>
+    </Tooltip>
+  );
+}
+
+function IdentityCard() {
+  return (
+    <div className="relative">
+      {/* violet halo — marks the card as the section's single focal point */}
+      <div
+        aria-hidden
+        className="absolute -inset-5 -z-10 rounded-4xl bg-accent/15 blur-2xl dark:bg-accent/10"
+      />
+      {/* hairline gradient ring — accent at the top, fading into the border */}
+      <div className="rounded-2xl bg-linear-to-b from-accent/50 via-border to-border p-px shadow-xl shadow-brand/5 dark:shadow-black/40">
+        <div className="overflow-hidden rounded-[calc(1rem-1px)] bg-surface">
+          {/* editor chrome — monochrome dots, filename, honest "read-only" */}
+          <div className="flex items-center gap-1.5 border-b border-border bg-surface-2/40 px-4 py-3 sm:px-5">
+            {[0, 1, 2].map((dot) => (
+              <span
+                key={dot}
+                aria-hidden
+                className="h-2.5 w-2.5 rounded-full bg-border"
+              />
+            ))}
+            <span className="ml-2.5 font-mono text-xs font-medium text-muted">
+              saif.ts
+            </span>
+            <span className="ml-auto font-mono text-xs text-muted/60">
+              read-only
+            </span>
+          </div>
+
+          {/* code body — static, real data only. Rows get an editor-style
+              hover highlight (pure CSS, inert on touch). */}
+          <div className="px-3 py-4 font-mono text-xs leading-5 sm:px-4 sm:py-5 sm:text-sm sm:leading-6">
+            {codeLines.map((tokens, line) => (
+              <div
+                key={line}
+                className="flex rounded px-1 transition-colors duration-200 hover:bg-surface-2/60 sm:px-2"
+              >
+                <span
+                  aria-hidden
+                  className="w-8 shrink-0 select-none pr-3 text-right text-muted/40"
+                >
+                  {line + 1}
+                </span>
+                <span className="whitespace-pre">
+                  {tokens.map((token, i) => (
+                    <CodeToken key={i} token={token} />
+                  ))}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
-    <section id="About" className="relative overflow-hidden py-16 md:py-24">
-      {/* ambient violet depth — matches the Skills / Experience sections */}
+    <section id="About" className="relative overflow-hidden pt-10 pb-16 md:pt-12 md:pb-24">
+      {/* ambient violet depth — matches the sibling sections */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -left-40 top-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute -right-32 bottom-16 h-96 w-96 rounded-full bg-brand-soft/5 blur-3xl dark:bg-accent-bright/5" />
       </div>
 
       <Container>
-        <Reveal>
-          {/* ── ROW 1: narrative left, at-a-glance card right ─────────── */}
-          <div className="grid gap-8 lg:grid-cols-[3fr_2fr] lg:gap-12">
-            <div className="flex flex-col">
+        {/* section-boundary hairline — same faded rule the Footer uses */}
+        <div
+          aria-hidden
+          className="h-px w-full bg-linear-to-r from-transparent via-border to-transparent"
+        />
+
+        {/* ── ROW 1: editorial lead left · saif.ts identity card right ───── */}
+        <Reveal className="mt-10 md:mt-14">
+          <div className="grid gap-12 lg:grid-cols-[3fr_2fr] lg:items-center lg:gap-16">
+            <div>
               <SectionHeading
                 eyebrow="Who I am"
                 title="About"
                 accent="Me"
                 align="left"
               />
-              {/* LEAD — first paragraph, verbatim, with an editorial accent rule */}
-              <p className="mt-6 max-w-xl text-pretty border-l-2 border-accent/60 pl-5 text-xl font-medium leading-relaxed text-fg/90 sm:text-2xl">
+              {/* LEAD — first paragraph, verbatim, set in the display face so
+                  it ties to the Space Grotesk heading above it */}
+              <p className="mt-6 max-w-xl text-pretty border-l-2 border-accent/60 pl-5 font-display text-xl font-medium leading-snug tracking-[-0.01em] text-fg/90 sm:text-2xl">
                 {lead}
               </p>
-              <div className="mt-8">
-                <Button
-                  href={RESUME.view}
-                  target="_blank"
-                  variant="soft"
-                  size="lg"
-                  aria-label="View resume (opens in a new tab)"
-                  className="group/cta"
-                >
-                  View Resume
-                  <FiArrowUpRight
-                    size={18}
-                    aria-hidden
-                    className="transition-transform duration-300 ease-spring group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
-                  />
-                </Button>
-              </div>
             </div>
 
-            {/* AT A GLANCE — stats + role/location: the section's visual anchor */}
-            <div className={`${card} flex flex-col justify-center`}>
-              <h3 className="flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted">
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent" />
-                At a glance
-              </h3>
-              <dl className="mt-6 grid grid-cols-3 gap-4">
-                {stats.map(({ value, label, icon: Icon }) => (
-                  <div key={label} className="flex flex-col gap-1">
-                    <Icon size={16} aria-hidden className="text-accent" />
-                    <dt className="text-3xl font-semibold tabular-nums leading-none text-fg sm:text-4xl">
-                      {value}
-                    </dt>
-                    <dd className="text-xs font-medium uppercase tracking-wide text-muted">
-                      {label}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-6 flex flex-col gap-3 border-t border-border pt-6">
-                <p className="flex items-center gap-2.5 text-sm text-muted">
-                  <FiCode size={16} aria-hidden className="shrink-0 text-accent" />
-                  {focus}
-                </p>
-                <p className="flex items-center gap-2.5 text-sm text-muted">
-                  <FiMapPin size={16} aria-hidden className="shrink-0 text-accent" />
-                  {contact.location}
-                </p>
-              </div>
-            </div>
+            <IdentityCard />
           </div>
+        </Reveal>
 
-          {/* ── ROW 2: the story — labelled chapters, scannable ───────── */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 md:mt-14">
-            {story.map((paragraph, i) => {
-              const meta = storyMeta[i] ?? { label: "More", icon: FiCode };
-              const Icon = meta.icon;
-              return (
-                <div
-                  key={i}
-                  className={`group ${card} transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-accent/40`}
-                >
-                  <h3 className="flex items-center gap-3 text-sm font-semibold text-fg">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/15 transition-colors duration-300 ease-smooth group-hover:bg-accent/15">
-                      <Icon size={17} aria-hidden />
-                    </span>
-                    {meta.label}
-                  </h3>
-                  <p className="mt-4 text-pretty leading-relaxed text-muted">
-                    {paragraph}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ── ROW 3: how I work — soft skills as compact chips ──────── */}
-          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3">
-            <span className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted">
-              How I work
-            </span>
-            <span aria-hidden className="hidden h-px flex-1 bg-border sm:block" />
-            <ul className="flex flex-wrap gap-2.5">
-              {softSkills.map((skill) => {
-                const Icon = traitIcons[skill.title] ?? FiZap;
-                return (
-                  <li
-                    key={skill.title}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium text-fg/80"
-                  >
-                    <Icon size={15} aria-hidden className="text-accent" />
-                    {skill.title}
-                  </li>
-                );
-              })}
-            </ul>
+        {/* ── ROW 2: the story — three numbered chapters, flat + editorial ── */}
+        <Reveal className="mt-14 md:mt-20">
+          <div className="grid gap-10 lg:grid-cols-3 lg:gap-8 xl:gap-12">
+            {story.map((paragraph, i) => (
+              <article
+                key={i}
+                className="max-w-2xl border-t border-border pt-6 lg:max-w-none"
+              >
+                <h3 className="flex items-baseline gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em]">
+                  <span aria-hidden className="text-accent">
+                    {`0${i + 1}`}
+                  </span>
+                  <span className="text-muted">
+                    {chapterLabels[i] ?? "More"}
+                  </span>
+                </h3>
+                <p className="mt-3.5 text-pretty leading-relaxed text-muted">
+                  {paragraph}
+                </p>
+              </article>
+            ))}
           </div>
         </Reveal>
       </Container>

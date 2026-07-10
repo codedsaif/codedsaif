@@ -74,6 +74,8 @@ export default function GitHubActivity() {
                           <img
                             src={stat.src}
                             alt={stat.alt}
+                            width={stat.width}
+                            height={stat.height}
                             loading="lazy"
                             decoding="async"
                             className={
@@ -100,6 +102,8 @@ export default function GitHubActivity() {
                         <img
                           src={stat.src}
                           alt={stat.alt}
+                          width={stat.width}
+                          height={stat.height}
                           loading="lazy"
                           decoding="async"
                           className="h-auto w-full"
@@ -118,6 +122,8 @@ export default function GitHubActivity() {
                       <img
                         src={stat.src}
                         alt={stat.alt}
+                        width={stat.width}
+                        height={stat.height}
                         loading="lazy"
                         decoding="async"
                         className="mx-auto h-auto w-full"

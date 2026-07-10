@@ -55,12 +55,7 @@ export default function Project({
           <span aria-hidden className="h-px flex-1 bg-border" />
         </div>
 
-        <h3
-          className={
-            "font-semibold leading-[1.05] text-fg transition-colors duration-300 ease-smooth group-hover:text-accent " +
-            (featured ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl")
-          }
-        >
+        <h3 className="text-2xl font-semibold leading-[1.1] text-fg transition-colors duration-300 ease-smooth group-hover:text-accent sm:text-3xl md:text-4xl">
           {name}
         </h3>
 

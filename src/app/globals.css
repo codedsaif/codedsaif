@@ -137,6 +137,17 @@ body {
   font-feature-settings: "zero" 1, "tnum" 1;
 }
 
+/* Chrome/Edge autofill repaints inputs with an opaque pale box — repaint with
+   our own surface + fg tokens so the transparent notched inputs survive
+   autofill in both themes. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--surface) inset;
+  -webkit-text-fill-color: var(--fg);
+  caret-color: var(--fg);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   body {
     transition: background-color 0.45s var(--ease-smooth),

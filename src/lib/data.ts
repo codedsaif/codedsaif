@@ -77,8 +77,6 @@ export type NavLink =
   | { label: string; href: string }
   | { label: string; children: { label: string; href: string }[] };
 
-export type Account = { label: string; link: string };
-
 export type SkillCategory =
   | "Frontend"
   | "Backend & Databases"
@@ -126,6 +124,10 @@ export type GitHubStat = {
   src: string;
   alt: string;
   kind: "hero" | "wide" | "boxed" | "compact";
+  /** Intrinsic SVG size (verified from each service) — reserves space so the
+      section doesn't jump as widgets load (CLS). */
+  width: number;
+  height: number;
 };
 
 export type Social = { label: string; href: string; icon: IconType };
@@ -152,30 +154,21 @@ export const navLinks: NavLink[] = [
   { label: "Contact", href: "#Contact" },
 ];
 
-export const accounts: Account[] = [
-  { label: "Phone", link: "tel:+916397727906" },
-  { label: "Email", link: "mailto:saifali27906@gmail.com" },
-  { label: "LinkedIn", link: "https://www.linkedin.com/in/codedsaif/" },
-  { label: "GitHub", link: "https://github.com/codedsaif/" },
-  { label: "LeetCode", link: "https://leetcode.com/codedsaif/" },
-];
-
 // ---- Profile (hero) ---------------------------------------------------------
 export const profile = {
   firstName: "Saif Ali,",
   role: "Full Stack Developer!",
   description:
-    "A seasoned Full Stack Developer with hands-on experience and a strong technical foundation in Data Structures, Algorithms, HTML, CSS, JavaScript, Php, WordPress, React, Next.js, Node.js, Express.js, MongoDB, and more. Dedicated to continuous learning and staying abreast of industry advancements.",
+    "Full Stack Developer with 3+ years of hands-on experience building fast, scalable web apps — from responsive React and Next.js frontends to robust Node.js, Express and MongoDB backends.",
   phone: "tel:+916397727906",
 };
 
 // ---- About ------------------------------------------------------------------
 export const aboutParagraphs: string[] = [
-  "Welcome to my digital space! I'm Saif Ali, a passionate and results-driven Full Stack Developer. With over three years of hands-on experience in web development, I'm on a mission to bring creativity and functionality to the digital realm.",
-  "My journey in the world of coding has equipped me with a diverse skill set encompassing HTML, CSS, Bootstrap, JavaScript, Java, Php, WordPress, React, Redux, JSON, GitHub, Node.js, MongoDB, Express.js, Context API, Axios, and Data Structures and Algorithms. This proficiency allows me to seamlessly navigate the complexities of both front-end and back-end development, weaving together engaging and interactive web experiences.",
+  "Welcome to my digital space! I'm a passionate, results-driven developer on a mission to bring creativity and functionality to the digital realm.",
+  "My journey in the world of coding has equipped me with a diverse skill set across every layer of the stack — from crafting engaging, interactive interfaces to designing the APIs and databases behind them. That range allows me to seamlessly navigate the complexities of both front-end and back-end development.",
   "Beyond the lines of code, I am a firm believer in continuous learning. Staying at the forefront of industry trends, I am committed to delivering cutting-edge solutions that resonate with the ever-evolving digital landscape.",
   "In addition to my technical prowess, I embrace a dynamic approach to life. An enthusiastic runner and bike rider, I believe in fostering a well-rounded perspective that fuels creativity and innovation.",
-  "Education-wise, I hold a Full Stack Web Development certification from Masai School and a B.Com degree from Krishna Mahavidyalaya (M.J.P.R.U.). Complementing these credentials is the successful completion of an IT - O'Level course from S.A. Institute (N.I.E.I.T.).",
 ];
 
 // ---- Technical proficiency --------------------------------------------------
@@ -337,36 +330,51 @@ export const softSkills: SoftSkill[] = [
 //   Row 1  → contribution calendar (hero, full width)
 //   Row 2  → activity graph + profile summary (two wide half-width tiles)
 //   Row 3  → stats · streak · languages (three compact third-width tiles)
+// NOTE: stats + top-langs use the maintained denvercoder1 instance (same API,
+// same params) — the public github-readme-stats.vercel.app deployment is
+// PAUSED (503) and was serving broken images.
 export const githubStats: GitHubStat[] = [
   {
     src: "https://ghchart.rshah.org/a78bfa/codedsaif",
     alt: "codedsaif's GitHub contribution graph over the last year",
     kind: "hero",
+    width: 663,
+    height: 104,
   },
   {
     src: "https://github-readme-activity-graph.vercel.app/graph?username=codedsaif&bg_color=00000000&color=e0e7ff&line=a78bfa&point=e0e7ff&area=true&area_color=a78bfa&hide_border=true&custom_title=%20&height=300",
     alt: "codedsaif's GitHub activity graph over the last year",
     kind: "wide",
+    width: 1200,
+    height: 300,
   },
   {
     src: "https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=codedsaif&theme=tokyonight",
     alt: "codedsaif's GitHub profile summary — join date, contributions and activity",
     kind: "boxed",
+    width: 700,
+    height: 200,
   },
   {
-    src: "https://github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&hide_border=true&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1&icon_color=a78bfa",
+    src: "https://denvercoder1-github-readme-stats.vercel.app/api?username=codedsaif&show_icons=true&hide_border=true&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1&icon_color=a78bfa",
     alt: "codedsaif's GitHub stats — stars, commits, PRs and issues",
     kind: "compact",
+    width: 467,
+    height: 195,
   },
   {
     src: "https://streak-stats.demolab.com?user=codedsaif&hide_border=true&background=00000000&stroke=a78bfa&ring=a78bfa&fire=a78bfa&currStreakLabel=a78bfa&sideLabels=cbd5e1&currStreakNum=e0e7ff&sideNums=e0e7ff&dates=8b93a7&dayLabels=a78bfa",
     alt: "codedsaif's GitHub contribution streak",
     kind: "compact",
+    width: 495,
+    height: 195,
   },
   {
-    src: "https://github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&layout=compact&hide_border=true&langs_count=8&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1",
+    src: "https://denvercoder1-github-readme-stats.vercel.app/api/top-langs/?username=codedsaif&layout=compact&hide_border=true&langs_count=8&bg_color=00000000&title_color=a78bfa&text_color=cbd5e1",
     alt: "codedsaif's most-used languages",
     kind: "compact",
+    width: 300,
+    height: 165,
   },
 ];
 
@@ -381,7 +389,7 @@ export const projects: Project[] = [
     stack: "Full Stack",
     name: "Jobify",
     description:
-      "Jobify is a web application designed to help job seekers track their job applications and stay organized throughout the job search process. With Jobify, users can easily add and manage job applications, update their personal information,...",
+      "Full-stack job-application tracker — add and manage applications, update profile details, and monitor your search from a stats dashboard.",
     techStack: [
       "React",
       "Styled Components",
@@ -401,7 +409,7 @@ export const projects: Project[] = [
     stack: "Frontend",
     name: "IKEA",
     description:
-      "Ikea is the one of the famous website for buying furniture and home appliance. They have lowered them prices ! Find affordable home furnishings solutions, all in one store.",
+      "Frontend IKEA storefront clone — product browsing, cart and responsive layouts built with React, Redux and Bootstrap.",
     techStack: [
       "React",
       "Module CSS",
@@ -431,7 +439,7 @@ export const projects: Project[] = [
     stack: "Frontend",
     name: "BestBuy",
     description:
-      "Best Buy Co., Inc. is a provider of consumer technology products and services. The Company offers a range of merchandise and services to its customers, including computing and mobile phones, consumer electronics,...",
+      "Multi-page BestBuy storefront clone in vanilla JavaScript — product listings, filtering, cart and checkout.",
     techStack: ["HTML", "CSS", "Bootstrap", "Javascript", "Advance JS"],
     slider: [
       bestbuy1,
@@ -449,7 +457,7 @@ export const projects: Project[] = [
     stack: "Frontend",
     name: "PharmEasy",
     description:
-      "Created Clone of India's Largest e-PharmEasy Company. Features Like. Filer Product , Add to Cart, Checkout Etc",
+      "Clone of PharmEasy, India's largest e-pharmacy — product filtering, add-to-cart and checkout, built in vanilla JavaScript.",
     techStack: ["HTML", "CSS", "Bootstrap", "Javascript"],
     slider: [
       pharmeasy1,
@@ -468,7 +476,7 @@ export const projects: Project[] = [
     stack: "Frontend",
     name: "Calendly",
     description:
-      "Calendly is a web application for scheduling appointments, meetings, and events.",
+      "Calendly clone — scheduling UI with login, events and subscription pages, built in vanilla JavaScript.",
     techStack: ["HTML", "CSS", "Bootstrap", "Javascript"],
     slider: [
       { image: calendly1, title: "Landing Page" },
@@ -477,26 +485,29 @@ export const projects: Project[] = [
       { image: calendly4, title: "Subscription Page" },
     ],
     liveLink: "https://sunny-stroopwafel-bdb2f1.netlify.app",
-    gitHubLink: "https://github.com/codedsaif",
+    // No public repo link — pointing "Code" at the profile page was misleading.
+    gitHubLink: "",
   },
   {
     stack: "Frontend",
     name: "Hebeboutique",
     description:
-      "Hebeboutique is a Nz based website which provides grooming items,jewellery.etc.In this web site I have done login signup ,product and cart page ,and redux.",
+      "Clone of Hebeboutique, an NZ grooming and jewellery store — login/signup, product and cart pages with Redux state.",
     techStack: ["React", "Module CSS", "Redux", "ContextAPI", "Chakra UI"],
     slider: [
       { image: hebe1, title: "Home Page" },
       { image: hebe2, title: "Login Page" },
     ],
     liveLink: "https://astonishing-biscotti-a93985.netlify.app",
-    gitHubLink: "https://github.com/codedsaif",
+    // No public repo link — pointing "Code" at the profile page was misleading.
+    gitHubLink: "",
   },
 ];
 
 // ---- Contact ----------------------------------------------------------------
 export const contact = {
-  intro: "Fill up the form below to contact",
+  intro:
+    "Have a project, a role, or a quick question? Drop me a message below — or reach me directly by email or phone.",
   phone: { label: "+91-6397727906", href: "tel:+916397727906" },
   email: {
     label: "saifali27906@gmail.com",
@@ -509,10 +520,10 @@ export const contact = {
     linkedin: "https://www.linkedin.com/in/codedsaif/",
   },
   placeholders: {
-    name: "Saif Ali",
-    email: "saifali27906@gmail.com",
+    name: "e.g. Jane Smith",
+    email: "you@company.com",
     subject: "Project enquiry",
-    message: "message",
+    message: "Tell me a bit about your project, role, or question…",
   },
 };
 
@@ -557,11 +568,6 @@ export const socials: Social[] = [
     label: "developersdrills-Medium",
     href: "https://medium.com/@developersdrills",
     icon: FaMedium,
-  },
-  {
-    label: "developersdrills-Instagram",
-    href: "https://github.com/developersdrills",
-    icon: FaTwitter,
   },
   {
     label: "developersdrills-Telegram",

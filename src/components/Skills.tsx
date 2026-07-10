@@ -85,7 +85,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <section id="Tech Skills" className="relative overflow-hidden py-16 md:py-24">
+    <section id="Tech Skills" className="relative overflow-hidden pt-10 pb-16 md:pt-12 md:pb-24">
       {/* ambient violet depth — matches the Experience section */}
       <div
         aria-hidden
@@ -97,16 +97,19 @@ export default function Skills() {
       />
 
       <Container>
+        {/* section-boundary hairline — same faded rule the Footer uses */}
+        <div
+          aria-hidden
+          className="h-px w-full bg-linear-to-r from-transparent via-border to-transparent"
+        />
+
         <SectionHeading
           eyebrow="Stack"
           title="Technical"
           accent="Proficiency"
           align="left"
+          className="mt-10 md:mt-14"
         />
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          Move your cursor across the grid — the tools I reach for light up as
-          you go. Hover any tile for what it is and where I use it.
-        </p>
 
         {/* SPOTLIGHT SURFACE — pointer x/y feed the radial glow via CSS vars. */}
         <div

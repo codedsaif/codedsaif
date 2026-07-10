@@ -17,9 +17,11 @@ export default function Home() {
         <Navbar />
       </header>
       <main>
-        {/* Order: lead with proof (Projects + GitHub), then background
-            (Skills + Experience). Navy cards (About / GitHub / Contact)
-            alternate with page-bg sections for visual rhythm. */}
+        {/* Order: hook (Profile) → context (About) → proof (Projects + GitHub)
+            → capability (Skills) → history (Experience) → CTA (Contact).
+            GitHub and Contact are the ONLY navy cards — mid-page anchor and
+            page finale; every page-bg section opens with the faded boundary
+            hairline. */}
         <Profile />
         <About />
         <Projects />

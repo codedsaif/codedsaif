@@ -15,17 +15,17 @@ const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 // Outlined inputs with a notched label that straddles the top border. The label
 // is a `bg-surface` chip so it cleanly cuts the border (matches the solid card).
 const inputClasses =
-  "peer w-full rounded-xl border border-border/70 bg-transparent py-3.5 pl-11 pr-3.5 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
+  "peer w-full rounded-xl border border-border/70 bg-transparent py-2.5 pl-10 pr-3 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
 const textareaClasses =
-  "peer w-full resize-y rounded-xl border border-border/70 bg-transparent px-3.5 py-3.5 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
+  "peer w-full resize-y rounded-xl border border-border/70 bg-transparent px-3 py-2.5 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
 const fieldIconClasses =
-  "pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-muted transition-colors duration-300 ease-smooth peer-focus-visible:text-accent";
+  "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted transition-colors duration-300 ease-smooth peer-focus-visible:text-accent";
 // Notched label: sits on the top border (half above / half below), the bg-surface
 // chip erases the border segment behind it so the outline reads as a clean notch.
 const labelClasses =
   "pointer-events-none absolute -top-2 left-3 z-1 bg-surface px-1.5 text-xs font-medium text-muted transition-colors duration-300 ease-smooth peer-focus-visible:text-accent";
 
-// Trust microcopy shown right before the CTA — the #1 hesitation-killer.
+// Trust microcopy shown right beside the CTA — the #1 hesitation-killer.
 // Edit this one line to tune the privacy reassurance.
 const PRIVACY_NOTE = "Your details stay private — never shared.";
 
@@ -129,7 +129,10 @@ export default function Contact() {
             <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-brand-soft/10 blur-3xl" />
             <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-bright/5 blur-3xl" />
 
-            <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-12">
+            {/* Three grid children so MOBILE order is heading → form → details
+                (a phone user reaches the first input without scrolling past
+                the whole rail); on lg the form spans both rows on the right. */}
+            <div className="relative grid gap-10 lg:grid-cols-2 lg:gap-12">
               {/* LEFT RAIL — quiet on the navy panel: heading, one-line lead,
                   hairless details, icon-only socials. */}
               <div>
@@ -144,8 +147,162 @@ export default function Contact() {
                   {contact.intro}
                 </p>
 
+              </div>
+
+              {/* RIGHT — the form is the hero, on the original glassy surface card. */}
+              <div className="rounded-3xl border border-white/10 bg-surface p-5 shadow-2xl shadow-black/40 ring-1 ring-black/5 sm:p-6 md:p-7 lg:col-start-2 lg:row-start-1 lg:row-span-2">
+                <form
+                  onSubmit={onSubmit}
+                  onFocus={preloadRecaptcha}
+                  aria-busy={loading}
+                  className="space-y-4"
+                >
+                  {/* Honeypot — hidden from humans, tempting to bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={onChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="hidden"
+                  />
+
+                  {/* Input first (the `peer`), then the notched label + icon so
+                      both react to peer-focus. */}
+                  <div className="relative">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      autoComplete="name"
+                      placeholder={contact.placeholders.name}
+                      value={form.name}
+                      onChange={onChange}
+                      className={inputClasses}
+                    />
+                    <label htmlFor="name" className={labelClasses}>
+                      Your Name
+                    </label>
+                    <BsPerson className={fieldIconClasses} />
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      placeholder={contact.placeholders.email}
+                      value={form.email}
+                      onChange={onChange}
+                      className={inputClasses}
+                    />
+                    <label htmlFor="email" className={labelClasses}>
+                      Email
+                    </label>
+                    <MdOutlineEmail className={fieldIconClasses} />
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      placeholder={contact.placeholders.subject}
+                      value={form.subject}
+                      onChange={onChange}
+                      className={inputClasses}
+                    />
+                    <label htmlFor="subject" className={labelClasses}>
+                      Subject{" "}
+                      <span className="font-normal text-muted">(optional)</span>
+                    </label>
+                    <TbMessage className={fieldIconClasses} />
+                  </div>
+
+                  <div className="relative">
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      minLength={10}
+                      placeholder={contact.placeholders.message}
+                      value={form.message}
+                      onChange={onChange}
+                      className={textareaClasses}
+                    />
+                    <label htmlFor="message" className={labelClasses}>
+                      Message
+                    </label>
+                  </div>
+
+                  {/* Primary CTA — solid, theme-aware text for AA contrast (white on
+                      the darker light-mode violet, dark navy on the brighter dark-mode
+                      violet). Sheen sweep kept for flair. */}
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="group relative inline-flex h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-accent font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/45 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:brightness-100 dark:text-brand-deep"
+                  >
+                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-smooth group-hover:translate-x-full" />
+                    {loading ? (
+                      <span
+                        aria-hidden
+                        className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent"
+                      />
+                    ) : (
+                      <FiSend
+                        size={18}
+                        className="shrink-0 transition-transform duration-300 ease-spring group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    )}
+                    {loading ? "Sending…" : "Send Message"}
+                  </button>
+
+                  {/* Live region is ALWAYS mounted (sr-only when idle) so screen
+                      readers reliably announce the outcome; failures escalate to
+                      role="alert" for immediate announcement. */}
+                  <p
+                    role={result && !result.ok ? "alert" : "status"}
+                    className={
+                      result
+                        ? "flex items-center gap-2 rounded-xl border px-3.5 py-3 text-sm " +
+                          (result.ok
+                            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                            : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400")
+                        : "sr-only"
+                    }
+                  >
+                    {result &&
+                      (result.ok ? (
+                        <FiCheckCircle className="shrink-0" />
+                      ) : (
+                        <FiAlertCircle className="shrink-0" />
+                      ))}
+                    {result?.message}
+                  </p>
+
+                  {/* Trust + protection on ONE quiet meta line beside the CTA */}
+                  <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted">
+                    <span className="inline-flex items-center gap-1.5">
+                      <FiLock size={12} aria-hidden className="shrink-0 text-accent" />
+                      {PRIVACY_NOTE}
+                    </span>
+                    {RECAPTCHA_SITE_KEY && <span>Protected by reCAPTCHA.</span>}
+                  </div>
+                </form>
+              </div>
+
+              {/* DETAILS + SOCIALS — direct-reach alternatives; sit under the
+                  heading on lg, after the form on mobile. */}
+              <div className="lg:col-start-1 lg:row-start-2">
                 {/* Details — no boxes, just accent glyph + label with open rhythm */}
-                <ul className="mt-10 space-y-5">
+                <ul className="space-y-5">
                   {details.map(({ icon: Icon, label, href }) => {
                     const inner = (
                       <>
@@ -188,152 +345,6 @@ export default function Contact() {
                     </li>
                   ))}
                 </ul>
-
-                {/* Trust line — quiet privacy reassurance closing the rail */}
-                <p className="mt-8 flex items-center gap-2 text-sm text-brand-soft/60">
-                  <FiLock size={14} aria-hidden className="shrink-0 text-accent-bright" />
-                  {PRIVACY_NOTE}
-                </p>
-              </div>
-
-              {/* RIGHT — the form is the hero, on the original glassy surface card. */}
-              <div className="rounded-3xl border border-white/10 bg-surface p-6 shadow-2xl shadow-black/40 ring-1 ring-black/5 sm:p-8 md:p-10">
-                <form
-                  onSubmit={onSubmit}
-                  onFocus={preloadRecaptcha}
-                  aria-busy={loading}
-                  className="space-y-5"
-                >
-                  {/* Honeypot — hidden from humans, tempting to bots */}
-                  <input
-                    type="text"
-                    name="website"
-                    value={form.website}
-                    onChange={onChange}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    aria-hidden="true"
-                    className="hidden"
-                  />
-
-                  {/* Input first (the `peer`), then the notched label + icon so
-                      both react to peer-focus. */}
-                  <div className="relative">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      placeholder={contact.placeholders.name}
-                      value={form.name}
-                      onChange={onChange}
-                      className={inputClasses}
-                    />
-                    <label htmlFor="name" className={labelClasses}>
-                      Your Name
-                    </label>
-                    <BsPerson className={fieldIconClasses} />
-                  </div>
-
-                  <div className="relative">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder={contact.placeholders.email}
-                      value={form.email}
-                      onChange={onChange}
-                      className={inputClasses}
-                    />
-                    <label htmlFor="email" className={labelClasses}>
-                      Email
-                    </label>
-                    <MdOutlineEmail className={fieldIconClasses} />
-                  </div>
-
-                  <div className="relative">
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      placeholder={contact.placeholders.subject}
-                      value={form.subject}
-                      onChange={onChange}
-                      className={inputClasses}
-                    />
-                    <label htmlFor="subject" className={labelClasses}>
-                      Subject{" "}
-                      <span className="font-normal text-muted/60">(optional)</span>
-                    </label>
-                    <TbMessage className={fieldIconClasses} />
-                  </div>
-
-                  <div className="relative">
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={5}
-                      required
-                      minLength={10}
-                      placeholder={contact.placeholders.message}
-                      value={form.message}
-                      onChange={onChange}
-                      className={textareaClasses}
-                    />
-                    <label htmlFor="message" className={labelClasses}>
-                      Message
-                    </label>
-                  </div>
-
-                  {/* Primary CTA — solid, theme-aware text for AA contrast (white on
-                      the darker light-mode violet, dark navy on the brighter dark-mode
-                      violet). Sheen sweep kept for flair. */}
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="group relative inline-flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-accent font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/45 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0 disabled:hover:brightness-100 dark:text-brand-deep"
-                  >
-                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-smooth group-hover:translate-x-full" />
-                    {loading ? (
-                      <span
-                        aria-hidden
-                        className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-current border-t-transparent"
-                      />
-                    ) : (
-                      <FiSend
-                        size={18}
-                        className="shrink-0 transition-transform duration-300 ease-spring group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                      />
-                    )}
-                    {loading ? "Sending…" : "Send Message"}
-                  </button>
-
-                  {result && (
-                    <p
-                      className={
-                        "flex items-center gap-2 rounded-xl border px-3.5 py-3 text-sm " +
-                        (result.ok
-                          ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                          : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400")
-                      }
-                      role="status"
-                    >
-                      {result.ok ? (
-                        <FiCheckCircle className="shrink-0" />
-                      ) : (
-                        <FiAlertCircle className="shrink-0" />
-                      )}
-                      {result.message}
-                    </p>
-                  )}
-
-                  {RECAPTCHA_SITE_KEY && (
-                    <p className="text-center text-xs text-muted">
-                      Protected by reCAPTCHA.
-                    </p>
-                  )}
-                </form>
               </div>
             </div>
           </div>

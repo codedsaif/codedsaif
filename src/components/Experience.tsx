@@ -29,18 +29,6 @@ const KIND: Record<TimelineEntry["kind"], { icon: IconType; label: string }> = {
   education: { icon: LuGraduationCap, label: "Education" },
 };
 
-// Small legend chip decoding the briefcase / cap glyphs up front.
-function LegendItem({ icon: Icon, label }: { icon: IconType; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-sm font-medium text-fg/90">
-      <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-accent/10 text-accent dark:bg-accent-bright/10 dark:text-accent-bright">
-        <Icon size={13} aria-hidden />
-      </span>
-      {label}
-    </span>
-  );
-}
-
 // "Current" live badge — a pinging accent dot (reduced-motion safe via globals).
 function CurrentBadge() {
   return (
@@ -87,7 +75,7 @@ function RoleBody({ role }: { role: TimelineRole }) {
   return (
     <>
       {role.summary && (
-        <p className="mt-2 text-sm leading-relaxed text-muted">{role.summary}</p>
+        <p className="mt-2 text-base leading-relaxed text-muted">{role.summary}</p>
       )}
 
       {role.highlights.length > 0 && (
@@ -255,7 +243,7 @@ export default function Experience() {
   }, [visible]);
 
   return (
-    <section id="Experience" className="relative overflow-hidden py-16 md:py-24">
+    <section id="Experience" className="relative overflow-hidden pt-10 pb-16 md:pt-12 md:pb-24">
       {/* ambient violet depth */}
       <div
         aria-hidden
@@ -267,19 +255,19 @@ export default function Experience() {
       />
 
       <Container>
+        {/* section-boundary hairline — same faded rule the Footer uses */}
+        <div
+          aria-hidden
+          className="h-px w-full bg-linear-to-r from-transparent via-border to-transparent"
+        />
+
         <SectionHeading
           eyebrow="Career"
           title="Experience"
           accent="& Education"
           align="left"
+          className="mt-10 md:mt-14"
         />
-        <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-          A chronological look at where I&apos;ve worked and studied.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2.5">
-          <LegendItem icon={FiBriefcase} label="Work" />
-          <LegendItem icon={LuGraduationCap} label="Education" />
-        </div>
 
         {/* THE RAIL — one vertical line (uniform colour); cards sit to its right. */}
         <div className="relative mt-10 md:mt-14">

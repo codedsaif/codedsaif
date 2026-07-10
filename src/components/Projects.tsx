@@ -37,7 +37,7 @@ export default function Projects() {
   }, [visible]);
 
   return (
-    <section id="Projects" className="relative overflow-hidden py-16 md:py-24">
+    <section id="Projects" className="relative overflow-hidden pt-10 pb-16 md:pt-12 md:pb-24">
       {/* ambient violet depth — seats the case-study rows in the Indigo Noir field */}
       <div
         aria-hidden
@@ -49,18 +49,25 @@ export default function Projects() {
       />
 
       <Container>
+        {/* section-boundary hairline — same faded rule the Footer uses */}
+        <div
+          aria-hidden
+          className="h-px w-full bg-linear-to-r from-transparent via-border to-transparent"
+        />
+
         <SectionHeading
           eyebrow="Selected Work"
           title="Project"
           accent="Gallery"
           align="left"
+          className="mt-10 md:mt-14"
         />
 
         {/* All projects render to the DOM (crawlable); rows past `visible` are
             CSS-hidden so their images stay lazy and there's no layout flash. */}
         <div
           ref={listRef}
-          className="mt-10 flex flex-col divide-y divide-border md:mt-14"
+          className="mt-10 flex flex-col divide-y divide-border/60 md:mt-14"
         >
           {projects.map((p, i) => (
             <Reveal

@@ -4,7 +4,7 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { SiLeetcode } from "react-icons/si";
 import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
 import { Button, Container, Reveal } from "@/components/ui";
-import { profile, contact, softSkills, RESUME } from "@/lib/data";
+import { profile, contact, RESUME } from "@/lib/data";
 import portrait from "@/assets/Saif_Ali_Professional_Picture.png";
 
 // `profile.firstName` ships as "Saif Ali," — drop the trailing comma for the
@@ -59,21 +59,28 @@ export default function Profile() {
           <div className="grid gap-10 lg:grid-cols-[3fr_2fr] lg:gap-12">
             {/* LEFT — eyebrow, big name, role subtitle, value prop, traits, CTAs, socials */}
             <div className="order-2 flex flex-col items-center justify-center text-center lg:order-1 lg:items-start lg:text-left">
-              {/* greeting eyebrow + "available for work" status pill */}
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <span className="inline-flex items-center gap-2 font-mono text-sm font-medium uppercase tracking-[0.18em] text-muted">
+              {/* greeting eyebrow + status + location — ONE 12px metadata row,
+                  so the oversized name below it pops by contrast */}
+              <div className="flex flex-wrap items-center justify-center gap-2.5 lg:justify-start">
+                <span className="inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] text-muted">
                   <span
                     aria-hidden
                     className="h-px w-8 bg-linear-to-r from-accent to-transparent"
                   />
                   Hi, I&apos;m
                 </span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                  <span className="relative flex h-2.5 w-2.5">
+                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                  <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500/70" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                   </span>
                   Available for work
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted">
+                  <span aria-hidden className="font-mono text-accent">
+                    {"//"}
+                  </span>
+                  {contact.location}
                 </span>
               </div>
 
@@ -84,7 +91,7 @@ export default function Profile() {
                   {/* refined indigo→violet highlight sweep behind the name */}
                   <span
                     aria-hidden
-                    className="absolute inset-x-[-0.08em] bottom-[0.08em] z-0 h-[0.3em] -skew-y-1 rounded-lg bg-linear-to-r from-brand via-accent to-accent-bright opacity-90 dark:from-brand-deep dark:via-accent/80 dark:to-accent-bright"
+                    className="absolute inset-x-[-0.08em] bottom-[0.08em] z-0 h-[0.3em] -skew-y-1 rounded-lg bg-linear-to-r from-brand-soft via-accent/35 to-accent-bright/60 opacity-90 dark:from-brand-deep dark:via-accent/80 dark:to-accent-bright"
                   />
                 </span>
                 <span className="text-shine mt-3 block text-2xl font-semibold tracking-normal sm:text-3xl">
@@ -97,31 +104,12 @@ export default function Profile() {
                 {profile.description}
               </p>
 
-              {/* location + soft-skill traits, on one compact chip line */}
-              <div className="mt-5 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted">
-                  <span aria-hidden className="font-mono text-accent">
-                    {"//"}
-                  </span>
-                  {contact.location}
-                </span>
-                {softSkills.map((s) => (
-                  <span
-                    key={s.title}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-3 py-1.5 text-xs font-medium text-muted"
-                  >
-                    <span aria-hidden className="h-1 w-1 rounded-full bg-accent" />
-                    {s.title}
-                  </span>
-                ))}
-              </div>
-
               {/* CTAs — ONE dominant primary (View Work) + secondary Resume */}
               <div className="mt-7 flex w-full flex-col items-stretch gap-3.5 sm:w-auto sm:flex-row sm:items-center">
                 {/* Primary CTA — solid, theme-aware text for AA contrast, sheen sweep. */}
                 <a
                   href="#Projects"
-                  className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-7 text-base font-medium text-white shadow-lg shadow-accent/30 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/45 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg dark:text-brand-deep"
+                  className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-accent px-7 text-base font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/45 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-bg dark:text-brand-deep"
                 >
                   <span
                     aria-hidden

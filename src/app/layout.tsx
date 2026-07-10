@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeScript } from "@/components/ui";
+import { contact } from "@/lib/data";
+import portrait from "@/assets/Saif_Ali_Professional_Picture.png";
 
 // Type system — all self-hosted via next/font (zero runtime requests, zero CLS):
 //   Inter         → body / UI (the calm, hyper-legible neutral)
@@ -26,22 +28,61 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
+const SITE_URL = "https://codedsaif.developersdrills.com";
+const TITLE = "Saif Ali — Full Stack Developer | codedsaif";
+const DESCRIPTION =
+  "Saif Ali (@codedsaif) — Full Stack Developer with 3+ years of experience building fast, scalable web apps with React, Next.js, Node.js and MongoDB.";
+
+// Lean, honest metadata: a ~150-char description Google can actually show
+// (the old 1,400-char dump got truncated), a canonical URL, and real
+// OG/Twitter cards. The `keywords` tag is gone — Google has ignored it
+// since 2009; it was only shipping dead bytes.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://codedsaif.developersdrills.com"),
-  title: "Saif Ali - Full Stack Developer",
-  description:
-    "Saif Ali (@codedsaif) - Full Stack Web Developer About Me: I'm Saif Ali, an accomplished Full Stack Web Developer passionate about crafting engaging and interactive websites. With expertise in front-end technologies like HTML, CSS, JavaScript, React, and Next.js, along with a robust backend stack utilizing Node.js, Express.js, and MongoDB, I bring creativity to the digital realm. Technical Expertise: Front-End: HTML, CSS, JavaScript, React, Next.js Back-End: Node.js, Express.js, MongoDB Additional Skills: Strapi, PHP, WordPress, Redux, GitHub, and more. Education: Full Stack Web Development, B.Com, IT - O'Level Connect with me on LinkedIn & Twitter: @codedsaif. Explore my website:codedsaif.developersdrills.com. #codedsaif #developersdrills",
-  keywords:
-    "Saif Ali, codedsaif,Saif Ali Full Stack Web Developer, codedsaif HTML, codedsaif CSS, codedsaif JavaScript, codedsaif React, codedsaif Next.js, codedsaif Strapi, codedsaif PHP, codedsaif WordPress, codedsaif Web Development Portfolio, codedsaif Interactive Websites, codedsaif Code Enthusiast, codedsaif Technology Learner, codedsaif Portfolio, codedsaif Projects, codedsaif Coding Journey, codedsaif Tech Skills ,codedsaif Coding Expertise, codedsaif Coding Passion, codedsaif Tech Showcase, Web Development Enthusiast CodedSaif, developersdrills",
-  authors: [{ name: "Saif Ali", url: "https://codedsaif.developersdrills.com" }],
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  authors: [{ name: "Saif Ali", url: SITE_URL }],
+  creator: "Saif Ali",
   openGraph: {
-    title: "Saif Ali - Full Stack Developer",
-    description:
-      "Explore the portfolio of Saif Ali (@codedsaif), an experienced Full Stack Web Developer building fast, interactive websites with React, Next.js, Node.js, Express.js and MongoDB.",
-    url: "https://codedsaif.developersdrills.com",
-    siteName: "Saif Ali",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Saif Ali — codedsaif",
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: portrait.src,
+        width: portrait.width,
+        height: portrait.height,
+        alt: "Portrait of Saif Ali",
+      },
+    ],
   },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [portrait.src],
+  },
+};
+
+// Person schema — tells search engines who "codedsaif" is and links the
+// profiles together (the strongest personal-SEO signal a portfolio can send).
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Saif Ali",
+  alternateName: "codedsaif",
+  jobTitle: "Full Stack Developer",
+  url: SITE_URL,
+  image: `${SITE_URL}${portrait.src}`,
+  sameAs: [
+    contact.socials.github,
+    contact.socials.linkedin,
+    contact.socials.leetcode,
+  ],
 };
 
 export default function RootLayout({
@@ -60,6 +101,10 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         {/* Dev-only: unregister any stale service worker (e.g. a prior
             vite-plugin-pwa SW left on this port) and clear its caches, so it
             stops injecting /@vite/* and /dev-sw.js 404s. Gated to development so
