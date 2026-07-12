@@ -2,16 +2,12 @@ import type { StaticImageData } from "next/image";
 import type { IconType } from "react-icons";
 import {
   FaLinkedinIn,
-  FaFacebookF,
-  FaInstagram,
-  FaMedium,
-  FaTwitter,
+  FaXTwitter,
+  FaGithub,
   FaYoutube,
-  FaThreads,
-  FaTelegram,
-  FaWhatsapp,
+  FaDev,
+  FaProductHunt,
 } from "react-icons/fa6";
-import { TbWorldHeart } from "react-icons/tb";
 
 // ---- Tech skill icons -------------------------------------------------------
 import html from "@/assets/tech-skills/html.png";
@@ -528,56 +524,38 @@ export const contact = {
 };
 
 // ---- Footer -----------------------------------------------------------------
+// DevDrills (the company behind this site). A curated set — the professional,
+// dev-relevant channels only; personal links live in the hero + Contact.
 export const socials: Social[] = [
   {
-    label: "developersdrills-Website",
-    href: "https://developersdrills.com",
-    icon: TbWorldHeart,
-  },
-  {
-    label: "developersdrills-Linkedin",
-    href: "https://www.linkedin.com/company/developerdrills/",
+    label: "DevDrills on LinkedIn",
+    href: "https://www.linkedin.com/company/devdrills",
     icon: FaLinkedinIn,
   },
   {
-    label: "developersdrills-Facebook",
-    href: "https://www.facebook.com/people/Developersdrills/61554326645813/",
-    icon: FaFacebookF,
+    label: "DevDrills on X",
+    href: "https://x.com/devdrillsorg",
+    icon: FaXTwitter,
   },
   {
-    label: "developersdrills-Twitter",
-    href: "https://twitter.com/developerdrills",
-    icon: FaTwitter,
+    label: "DevDrills on GitHub",
+    href: "https://github.com/devdrillsorg",
+    icon: FaGithub,
   },
   {
-    label: "developersdrills-YouTube",
-    href: "https://www.youtube.com/@developersdrills",
+    label: "DevDrills on YouTube",
+    href: "https://www.youtube.com/@devdrillsorg",
     icon: FaYoutube,
   },
   {
-    label: "developersdrills-Instagram",
-    href: "https://www.instagram.com/developersdrills/",
-    icon: FaInstagram,
+    label: "DevDrills on Dev.to",
+    href: "https://dev.to/devdrills",
+    icon: FaDev,
   },
   {
-    label: "developersdrills-Threads",
-    href: "https://www.threads.net/@developersdrills",
-    icon: FaThreads,
-  },
-  {
-    label: "developersdrills-Medium",
-    href: "https://medium.com/@developersdrills",
-    icon: FaMedium,
-  },
-  {
-    label: "developersdrills-Telegram",
-    href: "https://t.me/developersdrills",
-    icon: FaTelegram,
-  },
-  {
-    label: "developersdrills-Whatsapp",
-    href: "https://whatsapp.com/channel/0029VaECGW35Ui2asKs7wc2p",
-    icon: FaWhatsapp,
+    label: "DevDrills on Product Hunt",
+    href: "https://www.producthunt.com/products/devdrills",
+    icon: FaProductHunt,
   },
 ];
 

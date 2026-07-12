@@ -14,16 +14,31 @@ const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 // Outlined inputs with a notched label that straddles the top border. The label
 // is a `bg-surface` chip so it cleanly cuts the border (matches the solid card).
-const inputClasses =
-  "peer w-full rounded-xl border border-border/70 bg-transparent py-2.5 pl-10 pr-3 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
-const textareaClasses =
-  "peer w-full resize-y rounded-xl border border-border/70 bg-transparent px-3 py-2.5 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 hover:border-border focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15";
-const fieldIconClasses =
-  "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted transition-colors duration-300 ease-smooth peer-focus-visible:text-accent";
+// Field chrome is split base + state, so an invalid field can turn red without
+// duplicating the whole class string. Border/ring/label/icon all shift together.
+const inputBase =
+  "peer w-full rounded-xl border bg-transparent py-2.5 pl-10 pr-3 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 focus-visible:ring-4";
+const textareaBase =
+  "peer w-full resize-y rounded-xl border bg-transparent px-3 py-2.5 text-fg outline-none transition-[border-color,box-shadow] duration-300 ease-smooth placeholder:text-muted/50 focus-visible:ring-4";
+const stateOk =
+  "border-border/70 hover:border-border focus-visible:border-accent focus-visible:ring-accent/15";
+const stateBad =
+  "border-red-500 hover:border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/20";
+
 // Notched label: sits on the top border (half above / half below), the bg-surface
 // chip erases the border segment behind it so the outline reads as a clean notch.
-const labelClasses =
-  "pointer-events-none absolute -top-2 left-3 z-1 bg-surface px-1.5 text-xs font-medium text-muted transition-colors duration-300 ease-smooth peer-focus-visible:text-accent";
+const labelBase =
+  "pointer-events-none absolute -top-2 left-3 z-1 bg-surface px-1.5 text-xs font-medium transition-colors duration-300 ease-smooth";
+const iconBase =
+  "pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ease-smooth";
+
+const inputCls = (bad: boolean) => `${inputBase} ${bad ? stateBad : stateOk}`;
+const textareaCls = (bad: boolean) =>
+  `${textareaBase} ${bad ? stateBad : stateOk}`;
+const labelCls = (bad: boolean) =>
+  `${labelBase} ${bad ? "text-red-500" : "text-muted peer-focus-visible:text-accent"}`;
+const iconCls = (bad: boolean) =>
+  `${iconBase} ${bad ? "text-red-500" : "text-muted peer-focus-visible:text-accent"}`;
 
 // Trust microcopy shown right beside the CTA — the #1 hesitation-killer.
 // Edit this one line to tune the privacy reassurance.
@@ -58,6 +73,44 @@ async function getRecaptchaToken(): Promise<string> {
 
 const EMPTY = { name: "", email: "", subject: "", message: "", website: "" };
 
+type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
+
+// Mirrors the backend's own rules (validators/contact.validator.js: name 1-100,
+// valid email, message 10-5000; subject optional) so a visitor is never bounced
+// by the server for something we can catch instantly. Subject is intentionally
+// unvalidated — it's optional and defaulted in the server action.
+function validate(values: typeof EMPTY): FieldErrors {
+  const errors: FieldErrors = {};
+
+  if (!values.name.trim()) errors.name = "Please enter your name.";
+
+  const email = values.email.trim();
+  if (!email) errors.email = "Please enter your email address.";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+    errors.email = "That doesn't look like a valid email address.";
+
+  const message = values.message.trim();
+  if (!message) errors.message = "Please write a message.";
+  else if (message.length < 10)
+    errors.message = "Your message needs at least 10 characters.";
+
+  return errors;
+}
+
+// Inline error under a field — linked to the input via aria-describedby.
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p
+      id={id}
+      className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-red-500"
+    >
+      <FiAlertCircle size={12} aria-hidden className="shrink-0" />
+      {message}
+    </p>
+  );
+}
+
 // Contact-detail rows + social chips — derived from data, kept declarative.
 const details = [
   { icon: MdEmail, label: contact.email.label, href: contact.email.href },
@@ -74,13 +127,23 @@ const socialChips = [
 export default function Contact() {
   const mountedAt = useRef(Date.now());
   const [form, setForm] = useState(EMPTY);
+  const [errors, setErrors] = useState<FieldErrors>({});
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<ContactResult | null>(null);
 
   const onChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+
+    // Typing in a flagged field clears its error immediately: red → normal.
+    setErrors((prev) => {
+      if (!(name in prev)) return prev; // nothing to clear — skip the re-render
+      const next = { ...prev };
+      delete next[name as keyof FieldErrors];
+      return next;
+    });
   };
 
   const preloadRecaptcha = () => {
@@ -89,10 +152,37 @@ export default function Contact() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Validate first — flag every bad field at once, then focus the first one so
+    // keyboard/screen-reader users land on the problem instead of hunting for it.
+    const found = validate(form);
+    setErrors(found);
+    const firstBad = (Object.keys(found) as (keyof FieldErrors)[])[0];
+    if (firstBad) {
+      setResult(null);
+      document.getElementById(firstBad)?.focus();
+      return;
+    }
+
     setLoading(true);
     setResult(null);
     try {
-      const recaptchaToken = await getRecaptchaToken();
+      // reCAPTCHA is isolated: if the script is blocked, or this domain isn't in
+      // the site key's allowed list, execute() throws. That used to die in the
+      // generic catch below with no clue — now it reports itself.
+      let recaptchaToken = "";
+      try {
+        recaptchaToken = await getRecaptchaToken();
+      } catch (err) {
+        console.error("[contact] reCAPTCHA could not issue a token —", err);
+        setResult({
+          ok: false,
+          message:
+            "Couldn't verify you're human — reCAPTCHA failed to load. Please refresh and try again.",
+        });
+        return;
+      }
+
       const res = await submitContact({
         name: form.name,
         email: form.email,
@@ -107,7 +197,8 @@ export default function Contact() {
       });
       setResult(res);
       if (res.ok) setForm(EMPTY);
-    } catch {
+    } catch (err) {
+      console.error("[contact] submit failed —", err);
       setResult({
         ok: false,
         message: "Something went wrong. Please try again later.",
@@ -155,9 +246,14 @@ export default function Contact() {
                   onSubmit={onSubmit}
                   onFocus={preloadRecaptcha}
                   aria-busy={loading}
+                  // noValidate: we own the invalid UX (red fields + inline
+                  // messages). `required`/`minLength` stay for a11y semantics.
+                  noValidate
                   className="space-y-4"
                 >
-                  {/* Honeypot — hidden from humans, tempting to bots */}
+                  {/* Honeypot — positioned OFF-SCREEN (not display:none, which
+                      bots detect and skip) so bots fill it and get flagged, per
+                      the backend's honeypot spec. */}
                   <input
                     type="text"
                     name="website"
@@ -166,45 +262,63 @@ export default function Contact() {
                     tabIndex={-1}
                     autoComplete="off"
                     aria-hidden="true"
-                    className="hidden"
+                    className="pointer-events-none absolute left-[-9999px] top-0 h-0 w-0 opacity-0"
                   />
 
                   {/* Input first (the `peer`), then the notched label + icon so
                       both react to peer-focus. */}
-                  <div className="relative">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      placeholder={contact.placeholders.name}
-                      value={form.name}
-                      onChange={onChange}
-                      className={inputClasses}
-                    />
-                    <label htmlFor="name" className={labelClasses}>
-                      Your Name
-                    </label>
-                    <BsPerson className={fieldIconClasses} />
+                  {/* The error sits OUTSIDE the `relative` box on purpose: the
+                      icon is centred with top-1/2, so if the error grew the
+                      positioned box the icon would drift down off the input. */}
+                  <div>
+                    <div className="relative">
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                        autoComplete="name"
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
+                        placeholder={contact.placeholders.name}
+                        value={form.name}
+                        onChange={onChange}
+                        className={inputCls(!!errors.name)}
+                      />
+                      <label htmlFor="name" className={labelCls(!!errors.name)}>
+                        Your Name
+                      </label>
+                      <BsPerson className={iconCls(!!errors.name)} />
+                    </div>
+                    <FieldError id="name-error" message={errors.name} />
                   </div>
 
-                  <div className="relative">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      placeholder={contact.placeholders.email}
-                      value={form.email}
-                      onChange={onChange}
-                      className={inputClasses}
-                    />
-                    <label htmlFor="email" className={labelClasses}>
-                      Email
-                    </label>
-                    <MdOutlineEmail className={fieldIconClasses} />
+                  <div>
+                    <div className="relative">
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        aria-invalid={!!errors.email}
+                        aria-describedby={
+                          errors.email ? "email-error" : undefined
+                        }
+                        placeholder={contact.placeholders.email}
+                        value={form.email}
+                        onChange={onChange}
+                        className={inputCls(!!errors.email)}
+                      />
+                      <label
+                        htmlFor="email"
+                        className={labelCls(!!errors.email)}
+                      >
+                        Email
+                      </label>
+                      <MdOutlineEmail className={iconCls(!!errors.email)} />
+                    </div>
+                    <FieldError id="email-error" message={errors.email} />
                   </div>
 
                   <div className="relative">
@@ -215,30 +329,40 @@ export default function Contact() {
                       placeholder={contact.placeholders.subject}
                       value={form.subject}
                       onChange={onChange}
-                      className={inputClasses}
+                      className={inputCls(false)}
                     />
-                    <label htmlFor="subject" className={labelClasses}>
+                    <label htmlFor="subject" className={labelCls(false)}>
                       Subject{" "}
                       <span className="font-normal text-muted">(optional)</span>
                     </label>
-                    <TbMessage className={fieldIconClasses} />
+                    <TbMessage className={iconCls(false)} />
                   </div>
 
-                  <div className="relative">
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      required
-                      minLength={10}
-                      placeholder={contact.placeholders.message}
-                      value={form.message}
-                      onChange={onChange}
-                      className={textareaClasses}
-                    />
-                    <label htmlFor="message" className={labelClasses}>
-                      Message
-                    </label>
+                  <div>
+                    <div className="relative">
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        required
+                        minLength={10}
+                        aria-invalid={!!errors.message}
+                        aria-describedby={
+                          errors.message ? "message-error" : undefined
+                        }
+                        placeholder={contact.placeholders.message}
+                        value={form.message}
+                        onChange={onChange}
+                        className={textareaCls(!!errors.message)}
+                      />
+                      <label
+                        htmlFor="message"
+                        className={labelCls(!!errors.message)}
+                      >
+                        Message
+                      </label>
+                    </div>
+                    <FieldError id="message-error" message={errors.message} />
                   </div>
 
                   {/* Primary CTA — solid, theme-aware text for AA contrast (white on

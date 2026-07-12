@@ -12,7 +12,7 @@ export default function Footer() {
 
         <div className="flex flex-col items-center justify-between gap-5 py-8 sm:flex-row md:py-10">
           <p className="text-sm text-muted">
-            © {year} developersdrills. All rights reserved
+            © {year} devdrills. All rights reserved
           </p>
 
           <ul className="flex flex-wrap items-center justify-center gap-1.5">

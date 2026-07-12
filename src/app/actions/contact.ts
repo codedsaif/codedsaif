@@ -18,6 +18,8 @@ type ContactPayload = {
   metadata?: Record<string, unknown>;
 };
 
+// Set CONTACT_API_URL in prod (e.g. https://api.developersdrills.com).
+// Fallback = the port micro.service actually listens on locally (8080).
 const API_BASE = process.env.CONTACT_API_URL ?? "http://localhost:8080";
 
 export async function submitContact(
@@ -32,6 +34,13 @@ export async function submitContact(
       h.get("x-real-ip") ||
       "";
 
+    // The backend REQUIRES subject (3–255 chars); the form makes it optional,
+    // so default an empty subject rather than let the server 400 the visitor.
+    const body = {
+      ...payload,
+      subject: payload.subject?.trim() || "New enquiry via portfolio",
+    };
+
     const res = await fetch(`${API_BASE}/api/v1/contacts`, {
       method: "POST",
       headers: {
@@ -40,7 +49,7 @@ export async function submitContact(
           ? { "X-Forwarded-For": clientIp, "X-Real-IP": clientIp }
           : {}),
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(body),
       cache: "no-store",
     });
 
@@ -49,6 +58,11 @@ export async function submitContact(
     } | null;
 
     if (!res.ok) {
+      // Targeted logging: the backend rejected us — surface WHY in the terminal.
+      console.error(
+        `[contact] ${res.status} from ${API_BASE}/api/v1/contacts —`,
+        data
+      );
       return {
         ok: false,
         message:
@@ -60,7 +74,14 @@ export async function submitContact(
       ok: true,
       message: data?.message ?? "Your message has been sent successfully.",
     };
-  } catch {
+  } catch (err) {
+    // Targeted logging: we never reached the backend (bad URL / not running /
+    // DNS). Logs the resolved base URL so a misconfigured CONTACT_API_URL is
+    // obvious instead of silent.
+    console.error(
+      `[contact] request to ${API_BASE}/api/v1/contacts failed —`,
+      err
+    );
     return {
       ok: false,
       message: "Unable to reach the server. Please try again later.",

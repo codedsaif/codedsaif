@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeScript } from "@/components/ui";
 import { contact } from "@/lib/data";
+import { DevToolsGuard } from "@/utils/webapi.utils";
 import portrait from "@/assets/Saif_Ali_Professional_Picture.png";
 
 // Type system — all self-hosted via next/font (zero runtime requests, zero CLS):
@@ -118,7 +119,13 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body>{children}</body>
+      <body>
+        {/* DevTools guard — pauses the app while DevTools is open (deterrent;
+            ?dev=debug bypasses). Must be a client component: called from this
+            Server Component directly, it never ran in the browser. */}
+        <DevToolsGuard />
+        {children}
+      </body>
     </html>
   );
 }
